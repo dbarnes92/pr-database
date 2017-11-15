@@ -35,7 +35,7 @@ CREATE TABLE `player` (
   `has_alt` int(1) DEFAULT '0',
   `mu` double DEFAULT NULL,
   `sigma` double DEFAULT NULL,
-  `last_match` varchar(256) DEFAULT NULL,
+  `last_match` datetime DEFAULT NULL,
   `decay_months` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=317 DEFAULT CHARSET=utf8;
@@ -113,16 +113,20 @@ DROP TABLE IF EXISTS `set_data`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `set_data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `winner_id` int(11) NOT NULL,
-  `loser_id` int(11) NOT NULL,
+  `sk_id` int(11) NOT NULL,
   `tournament_id` int(11) NOT NULL,
+  `player1` int(11) NOT NULL,
+  `player2` int(11) NOT NULL,
   `round` varchar(50) NOT NULL,
+  `tournament_nm` varchar(512) DEFAULT NULL,
+  `winner` int(11) NOT NULL COMMENT '1 or 2 for player1/player2',
+  `description` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk2_loser_id` (`loser_id`),
-  KEY `fk2_winner_id` (`winner_id`),
+  KEY `fk2_loser_id` (`player2`),
+  KEY `fk2_winner_id` (`player1`),
   KEY `fk_tournament_id` (`tournament_id`),
-  CONSTRAINT `fk2_loser_id` FOREIGN KEY (`loser_id`) REFERENCES `player` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk2_winner_id` FOREIGN KEY (`winner_id`) REFERENCES `player` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk2_loser_id` FOREIGN KEY (`player2`) REFERENCES `player` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk2_winner_id` FOREIGN KEY (`player1`) REFERENCES `player` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_tournament_id` FOREIGN KEY (`tournament_id`) REFERENCES `tournament` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -181,4 +185,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-15 12:59:15
+-- Dump completed on 2017-11-15 14:58:43

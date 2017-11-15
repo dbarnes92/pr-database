@@ -1505,7 +1505,7 @@ namespace SkillKeeper
                         command.Parameters.AddWithValue("@hasalt", hasalt);
                         command.Parameters.AddWithValue("@mu", player.Mu);
                         command.Parameters.AddWithValue("@sigma", player.Sigma);
-                        command.Parameters.AddWithValue("@lastmatch", player.LastMatch.ToString());
+                        command.Parameters.AddWithValue("@lastmatch", player.LastMatch);
                         command.Parameters.AddWithValue("@decaymonths", player.DecayMonths);
 
                         command.ExecuteNonQuery();
