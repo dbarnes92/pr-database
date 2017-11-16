@@ -9,6 +9,7 @@ namespace SkillKeeper
     class World
     {
         private String filename = "", name = "";
+        private int id = 0;
 
         public String Filename
         {
@@ -20,6 +21,12 @@ namespace SkillKeeper
         {
             get { return name; }
             set { name = value; }
+        }
+
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
         }
     }
 }
