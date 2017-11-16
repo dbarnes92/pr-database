@@ -117,14 +117,7 @@
             this.historyMoveMatchButton = new System.Windows.Forms.Button();
             this.label27 = new System.Windows.Forms.Label();
             this.historyGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TourneyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.timestampDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.matchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.historyMoveTourneyButton = new System.Windows.Forms.Button();
             this.historyMoveDatePicker = new System.Windows.Forms.DateTimePicker();
             this.historyViewAllCheck = new System.Windows.Forms.CheckBox();
@@ -136,17 +129,7 @@
             this.leaderboardTabTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.label30 = new System.Windows.Forms.Label();
             this.leaderBoardGrid = new System.Windows.Forms.DataGridView();
-            this.teamDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.charactersDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.winsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lossesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.drawsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.scoreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LastMatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.personBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.exportButton = new System.Windows.Forms.Button();
             this.leaderboardDatePicker = new System.Windows.Forms.DateTimePicker();
             this.settingsTab = new System.Windows.Forms.TabPage();
@@ -163,6 +146,8 @@
             this.label37 = new System.Windows.Forms.Label();
             this.settingsMatchesBox = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.settingsWorldName = new System.Windows.Forms.TextBox();
             this.aboutTab = new System.Windows.Forms.TabPage();
             this.aboutTabTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.label36 = new System.Windows.Forms.Label();
@@ -178,6 +163,23 @@
             this.saveWorldDialog = new System.Windows.Forms.SaveFileDialog();
             this.importFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.exportCSVDialog = new System.Windows.Forms.SaveFileDialog();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.timestampDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.matchBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.teamDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.charactersDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.winsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lossesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.drawsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.scoreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.personBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.fileTab.SuspendLayout();
             this.fileTabTableLayoutPanel.SuspendLayout();
@@ -191,16 +193,16 @@
             this.historyTab.SuspendLayout();
             this.historyTableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.historyGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.matchBindingSource)).BeginInit();
             this.leaderboardTab.SuspendLayout();
             this.leaderboardTabTableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.leaderBoardGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).BeginInit();
             this.settingsTab.SuspendLayout();
             this.settingsTabTableLayoutPanel.SuspendLayout();
             this.aboutTab.SuspendLayout();
             this.aboutTabTableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -239,34 +241,35 @@
             this.fileTabTableLayoutPanel.AutoSize = true;
             this.fileTabTableLayoutPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.fileTabTableLayoutPanel.ColumnCount = 6;
-            this.fileTabTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.fileTabTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 175F));
             this.fileTabTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 95F));
             this.fileTabTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 95F));
             this.fileTabTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 95F));
             this.fileTabTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 95F));
-            this.fileTabTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.fileTabTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.fileTabTableLayoutPanel.Controls.Add(this.pictureBox2, 0, 0);
             this.fileTabTableLayoutPanel.Controls.Add(this.fileSaveButton, 4, 1);
             this.fileTabTableLayoutPanel.Controls.Add(this.fileUpdateButton, 3, 1);
             this.fileTabTableLayoutPanel.Controls.Add(this.fileLoadButton, 2, 1);
             this.fileTabTableLayoutPanel.Controls.Add(this.fileNewButton, 1, 1);
-            this.fileTabTableLayoutPanel.Controls.Add(this.progressLabel, 0, 5);
-            this.fileTabTableLayoutPanel.Controls.Add(this.progressBar1, 0, 6);
+            this.fileTabTableLayoutPanel.Controls.Add(this.progressLabel, 0, 6);
             this.fileTabTableLayoutPanel.Controls.Add(this.fileImportSmashGGButton, 1, 3);
             this.fileTabTableLayoutPanel.Controls.Add(this.fileImportTioButton, 3, 3);
             this.fileTabTableLayoutPanel.Controls.Add(this.fileImportChallongeButton, 1, 2);
             this.fileTabTableLayoutPanel.Controls.Add(this.fileImportGlickoButton, 3, 2);
             this.fileTabTableLayoutPanel.Controls.Add(this.btnSaveToDb, 1, 4);
+            this.fileTabTableLayoutPanel.Controls.Add(this.progressBar1, 0, 7);
             this.fileTabTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileTabTableLayoutPanel.Location = new System.Drawing.Point(3, 3);
             this.fileTabTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.fileTabTableLayoutPanel.Name = "fileTabTableLayoutPanel";
-            this.fileTabTableLayoutPanel.RowCount = 7;
+            this.fileTabTableLayoutPanel.RowCount = 8;
             this.fileTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 63F));
             this.fileTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.fileTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 59F));
             this.fileTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 59F));
-            this.fileTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 110F));
+            this.fileTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 59F));
+            this.fileTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
             this.fileTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.fileTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.fileTabTableLayoutPanel.Size = new System.Drawing.Size(730, 370);
@@ -331,7 +334,7 @@
             // progressLabel
             // 
             this.progressLabel.AutoSize = true;
-            this.progressLabel.Location = new System.Drawing.Point(3, 320);
+            this.progressLabel.Location = new System.Drawing.Point(3, 321);
             this.progressLabel.Name = "progressLabel";
             this.progressLabel.Size = new System.Drawing.Size(48, 13);
             this.progressLabel.TabIndex = 8;
@@ -340,11 +343,11 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.fileTabTableLayoutPanel.SetColumnSpan(this.progressBar1, 6);
-            this.progressBar1.Location = new System.Drawing.Point(93, 349);
+            this.progressBar1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressBar1.Location = new System.Drawing.Point(3, 350);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(544, 17);
+            this.progressBar1.Size = new System.Drawing.Size(724, 17);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar1.TabIndex = 7;
             this.progressBar1.Visible = false;
@@ -401,9 +404,10 @@
             // 
             // btnSaveToDb
             // 
+            this.fileTabTableLayoutPanel.SetColumnSpan(this.btnSaveToDb, 2);
             this.btnSaveToDb.Location = new System.Drawing.Point(178, 213);
             this.btnSaveToDb.Name = "btnSaveToDb";
-            this.btnSaveToDb.Size = new System.Drawing.Size(89, 104);
+            this.btnSaveToDb.Size = new System.Drawing.Size(184, 53);
             this.btnSaveToDb.TabIndex = 11;
             this.btnSaveToDb.Text = "Save World to Database";
             this.btnSaveToDb.UseVisualStyleBackColor = true;
@@ -431,7 +435,7 @@
             this.manualResultsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.36842F));
             this.manualResultsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.31579F));
             this.manualResultsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
-            this.manualResultsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 156F));
+            this.manualResultsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 171F));
             this.manualResultsTableLayoutPanel.Controls.Add(this.matchQualBox, 2, 1);
             this.manualResultsTableLayoutPanel.Controls.Add(this.label11, 0, 6);
             this.manualResultsTableLayoutPanel.Controls.Add(this.label7, 0, 5);
@@ -483,7 +487,7 @@
             this.matchQualBox.Location = new System.Drawing.Point(193, 33);
             this.matchQualBox.Name = "matchQualBox";
             this.matchQualBox.ReadOnly = true;
-            this.matchQualBox.Size = new System.Drawing.Size(267, 20);
+            this.matchQualBox.Size = new System.Drawing.Size(252, 20);
             this.matchQualBox.TabIndex = 27;
             // 
             // label11
@@ -542,7 +546,7 @@
             this.manualDatePicker.Dock = System.Windows.Forms.DockStyle.Fill;
             this.manualDatePicker.Location = new System.Drawing.Point(193, 183);
             this.manualDatePicker.Name = "manualDatePicker";
-            this.manualDatePicker.Size = new System.Drawing.Size(267, 20);
+            this.manualDatePicker.Size = new System.Drawing.Size(252, 20);
             this.manualDatePicker.TabIndex = 6;
             // 
             // label5
@@ -567,7 +571,7 @@
             this.manualResultsTableLayoutPanel.SetColumnSpan(this.label25, 3);
             this.label25.Location = new System.Drawing.Point(193, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(267, 30);
+            this.label25.Size = new System.Drawing.Size(252, 30);
             this.label25.TabIndex = 28;
             this.label25.Text = "Match Quality";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -592,7 +596,7 @@
             this.manualResultsTableLayoutPanel.SetColumnSpan(this.label24, 3);
             this.label24.Location = new System.Drawing.Point(193, 150);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(267, 30);
+            this.label24.Size = new System.Drawing.Size(252, 30);
             this.label24.TabIndex = 25;
             this.label24.Text = "Match Date";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -625,7 +629,7 @@
             this.p1WinButton.Enabled = false;
             this.p1WinButton.Location = new System.Drawing.Point(193, 63);
             this.p1WinButton.Name = "p1WinButton";
-            this.p1WinButton.Size = new System.Drawing.Size(66, 24);
+            this.p1WinButton.Size = new System.Drawing.Size(62, 24);
             this.p1WinButton.TabIndex = 2;
             this.p1WinButton.Text = "P1 Win";
             this.p1WinButton.UseVisualStyleBackColor = true;
@@ -637,7 +641,7 @@
             this.ManualDescBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ManualDescBox.Location = new System.Drawing.Point(193, 123);
             this.ManualDescBox.Name = "ManualDescBox";
-            this.ManualDescBox.Size = new System.Drawing.Size(267, 20);
+            this.ManualDescBox.Size = new System.Drawing.Size(252, 20);
             this.ManualDescBox.TabIndex = 5;
             // 
             // label23
@@ -649,7 +653,7 @@
             this.manualResultsTableLayoutPanel.SetColumnSpan(this.label23, 3);
             this.label23.Location = new System.Drawing.Point(193, 90);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(267, 30);
+            this.label23.Size = new System.Drawing.Size(252, 30);
             this.label23.TabIndex = 24;
             this.label23.Text = "Match Description";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -658,9 +662,9 @@
             // 
             this.drawButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.drawButton.Enabled = false;
-            this.drawButton.Location = new System.Drawing.Point(265, 63);
+            this.drawButton.Location = new System.Drawing.Point(261, 63);
             this.drawButton.Name = "drawButton";
-            this.drawButton.Size = new System.Drawing.Size(123, 24);
+            this.drawButton.Size = new System.Drawing.Size(116, 24);
             this.drawButton.TabIndex = 3;
             this.drawButton.Text = "Draw";
             this.drawButton.UseVisualStyleBackColor = true;
@@ -670,9 +674,9 @@
             // 
             this.p2WinButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.p2WinButton.Enabled = false;
-            this.p2WinButton.Location = new System.Drawing.Point(394, 63);
+            this.p2WinButton.Location = new System.Drawing.Point(383, 63);
             this.p2WinButton.Name = "p2WinButton";
-            this.p2WinButton.Size = new System.Drawing.Size(66, 24);
+            this.p2WinButton.Size = new System.Drawing.Size(62, 24);
             this.p2WinButton.TabIndex = 4;
             this.p2WinButton.Text = "P2 Win";
             this.p2WinButton.UseVisualStyleBackColor = true;
@@ -710,9 +714,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(576, 30);
+            this.label4.Location = new System.Drawing.Point(561, 30);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(151, 30);
+            this.label4.Size = new System.Drawing.Size(166, 30);
             this.label4.TabIndex = 3;
             this.label4.Text = "Player 2";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -723,9 +727,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(576, 180);
+            this.label12.Location = new System.Drawing.Point(561, 180);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(151, 30);
+            this.label12.Size = new System.Drawing.Size(166, 30);
             this.label12.TabIndex = 22;
             this.label12.Text = "W/L/D";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -736,9 +740,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(576, 150);
+            this.label8.Location = new System.Drawing.Point(561, 150);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(151, 30);
+            this.label8.Size = new System.Drawing.Size(166, 30);
             this.label8.TabIndex = 18;
             this.label8.Text = "Score";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -749,9 +753,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(576, 120);
+            this.label9.Location = new System.Drawing.Point(561, 120);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(151, 30);
+            this.label9.Size = new System.Drawing.Size(166, 30);
             this.label9.TabIndex = 14;
             this.label9.Text = "Sigma";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -762,9 +766,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(576, 90);
+            this.label10.Location = new System.Drawing.Point(561, 90);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(151, 30);
+            this.label10.Size = new System.Drawing.Size(166, 30);
             this.label10.TabIndex = 13;
             this.label10.Text = "Mu";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -776,9 +780,9 @@
             this.manualResultsTableLayoutPanel.SetColumnSpan(this.player2Selector, 2);
             this.player2Selector.Dock = System.Windows.Forms.DockStyle.Fill;
             this.player2Selector.FormattingEnabled = true;
-            this.player2Selector.Location = new System.Drawing.Point(466, 63);
+            this.player2Selector.Location = new System.Drawing.Point(451, 63);
             this.player2Selector.Name = "player2Selector";
-            this.player2Selector.Size = new System.Drawing.Size(261, 21);
+            this.player2Selector.Size = new System.Drawing.Size(276, 21);
             this.player2Selector.TabIndex = 1;
             this.player2Selector.SelectedIndexChanged += new System.EventHandler(this.player2Box_SelectedIndexChanged);
             // 
@@ -787,7 +791,7 @@
             this.p2MuDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.p2MuDisplay.Location = new System.Drawing.Point(466, 93);
+            this.p2MuDisplay.Location = new System.Drawing.Point(451, 93);
             this.p2MuDisplay.Name = "p2MuDisplay";
             this.p2MuDisplay.ReadOnly = true;
             this.p2MuDisplay.Size = new System.Drawing.Size(104, 20);
@@ -798,7 +802,7 @@
             this.p2SigmaDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.p2SigmaDisplay.Location = new System.Drawing.Point(466, 123);
+            this.p2SigmaDisplay.Location = new System.Drawing.Point(451, 123);
             this.p2SigmaDisplay.Name = "p2SigmaDisplay";
             this.p2SigmaDisplay.ReadOnly = true;
             this.p2SigmaDisplay.Size = new System.Drawing.Size(104, 20);
@@ -809,7 +813,7 @@
             this.p2ScoreDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.p2ScoreDisplay.Location = new System.Drawing.Point(466, 153);
+            this.p2ScoreDisplay.Location = new System.Drawing.Point(451, 153);
             this.p2ScoreDisplay.Name = "p2ScoreDisplay";
             this.p2ScoreDisplay.ReadOnly = true;
             this.p2ScoreDisplay.Size = new System.Drawing.Size(104, 20);
@@ -820,7 +824,7 @@
             this.p2WLDBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.p2WLDBox.Location = new System.Drawing.Point(466, 183);
+            this.p2WLDBox.Location = new System.Drawing.Point(451, 183);
             this.p2WLDBox.Name = "p2WLDBox";
             this.p2WLDBox.ReadOnly = true;
             this.p2WLDBox.Size = new System.Drawing.Size(104, 20);
@@ -1360,22 +1364,6 @@
             this.historyGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.historyGridView_CellContentClick);
             this.historyGridView.CurrentCellDirtyStateChanged += new System.EventHandler(this.historyGridView_CurrentCellDirtyStateChanged);
             // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "Player1";
-            this.dataGridViewTextBoxColumn11.HeaderText = "Player1";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.Width = 67;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "Player2";
-            this.dataGridViewTextBoxColumn12.HeaderText = "Player2";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.Width = 67;
-            // 
             // TourneyName
             // 
             this.TourneyName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -1383,42 +1371,6 @@
             this.TourneyName.HeaderText = "Tournament";
             this.TourneyName.Name = "TourneyName";
             this.TourneyName.Width = 89;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "Description";
-            this.dataGridViewTextBoxColumn10.HeaderText = "Description";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.Width = 85;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "Winner";
-            this.dataGridViewTextBoxColumn13.HeaderText = "Winner";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.Width = 66;
-            // 
-            // timestampDataGridViewTextBoxColumn
-            // 
-            this.timestampDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.timestampDataGridViewTextBoxColumn.DataPropertyName = "Timestamp";
-            this.timestampDataGridViewTextBoxColumn.HeaderText = "Timestamp";
-            this.timestampDataGridViewTextBoxColumn.Name = "timestampDataGridViewTextBoxColumn";
-            this.timestampDataGridViewTextBoxColumn.Width = 83;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "Order";
-            this.dataGridViewTextBoxColumn14.HeaderText = "Order";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.Width = 58;
-            // 
-            // matchBindingSource
-            // 
-            this.matchBindingSource.DataSource = typeof(SkillKeeper.Match);
             // 
             // historyMoveTourneyButton
             // 
@@ -1575,87 +1527,6 @@
             this.leaderBoardGrid.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.leaderBoardGrid_CellContentDoubleClick);
             this.leaderBoardGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.leaderBoardGrid_CellDoubleClick);
             // 
-            // teamDataGridViewTextBoxColumn
-            // 
-            this.teamDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.teamDataGridViewTextBoxColumn.DataPropertyName = "Team";
-            this.teamDataGridViewTextBoxColumn.HeaderText = "Team";
-            this.teamDataGridViewTextBoxColumn.Name = "teamDataGridViewTextBoxColumn";
-            this.teamDataGridViewTextBoxColumn.ReadOnly = true;
-            this.teamDataGridViewTextBoxColumn.Width = 59;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nameDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // charactersDataGridViewTextBoxColumn
-            // 
-            this.charactersDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.charactersDataGridViewTextBoxColumn.DataPropertyName = "Characters";
-            this.charactersDataGridViewTextBoxColumn.HeaderText = "Characters";
-            this.charactersDataGridViewTextBoxColumn.Name = "charactersDataGridViewTextBoxColumn";
-            this.charactersDataGridViewTextBoxColumn.ReadOnly = true;
-            this.charactersDataGridViewTextBoxColumn.Width = 5;
-            // 
-            // winsDataGridViewTextBoxColumn
-            // 
-            this.winsDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.winsDataGridViewTextBoxColumn.DataPropertyName = "Wins";
-            this.winsDataGridViewTextBoxColumn.HeaderText = "Wins";
-            this.winsDataGridViewTextBoxColumn.Name = "winsDataGridViewTextBoxColumn";
-            this.winsDataGridViewTextBoxColumn.ReadOnly = true;
-            this.winsDataGridViewTextBoxColumn.Width = 56;
-            // 
-            // lossesDataGridViewTextBoxColumn
-            // 
-            this.lossesDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.lossesDataGridViewTextBoxColumn.DataPropertyName = "Losses";
-            this.lossesDataGridViewTextBoxColumn.HeaderText = "Losses";
-            this.lossesDataGridViewTextBoxColumn.Name = "lossesDataGridViewTextBoxColumn";
-            this.lossesDataGridViewTextBoxColumn.ReadOnly = true;
-            this.lossesDataGridViewTextBoxColumn.Width = 65;
-            // 
-            // drawsDataGridViewTextBoxColumn
-            // 
-            this.drawsDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.drawsDataGridViewTextBoxColumn.DataPropertyName = "Draws";
-            this.drawsDataGridViewTextBoxColumn.HeaderText = "Draws";
-            this.drawsDataGridViewTextBoxColumn.Name = "drawsDataGridViewTextBoxColumn";
-            this.drawsDataGridViewTextBoxColumn.ReadOnly = true;
-            this.drawsDataGridViewTextBoxColumn.Width = 62;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "TotalGames";
-            this.dataGridViewTextBoxColumn9.HeaderText = "TotalGames";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            this.dataGridViewTextBoxColumn9.Width = 89;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "WinPercent";
-            this.dataGridViewTextBoxColumn8.HeaderText = "WinPercent";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            this.dataGridViewTextBoxColumn8.Width = 88;
-            // 
-            // scoreDataGridViewTextBoxColumn
-            // 
-            this.scoreDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.scoreDataGridViewTextBoxColumn.DataPropertyName = "Score";
-            this.scoreDataGridViewTextBoxColumn.HeaderText = "Score";
-            this.scoreDataGridViewTextBoxColumn.Name = "scoreDataGridViewTextBoxColumn";
-            this.scoreDataGridViewTextBoxColumn.ReadOnly = true;
-            this.scoreDataGridViewTextBoxColumn.Width = 60;
-            // 
             // LastMatch
             // 
             this.LastMatch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -1664,10 +1535,6 @@
             this.LastMatch.Name = "LastMatch";
             this.LastMatch.ReadOnly = true;
             this.LastMatch.Width = 85;
-            // 
-            // personBindingSource
-            // 
-            this.personBindingSource.DataSource = typeof(SkillKeeper.Person);
             // 
             // exportButton
             // 
@@ -1714,22 +1581,26 @@
             this.settingsTabTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.settingsTabTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.settingsTabTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
-            this.settingsTabTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.settingsTabTableLayoutPanel.Controls.Add(this.settingsDecayNever, 3, 6);
-            this.settingsTabTableLayoutPanel.Controls.Add(this.settingsDecayIntBox, 2, 2);
-            this.settingsTabTableLayoutPanel.Controls.Add(this.settingsDecayYearly, 3, 5);
-            this.settingsTabTableLayoutPanel.Controls.Add(this.label28, 0, 0);
-            this.settingsTabTableLayoutPanel.Controls.Add(this.settingsDecayMonthly, 3, 4);
-            this.settingsTabTableLayoutPanel.Controls.Add(this.label38, 1, 2);
-            this.settingsTabTableLayoutPanel.Controls.Add(this.settingsDecayWeekly, 3, 3);
-            this.settingsTabTableLayoutPanel.Controls.Add(this.settingsMultiplierBox, 1, 0);
-            this.settingsTabTableLayoutPanel.Controls.Add(this.settingsDecayDaily, 3, 2);
-            this.settingsTabTableLayoutPanel.Controls.Add(this.label37, 0, 1);
-            this.settingsTabTableLayoutPanel.Controls.Add(this.settingsMatchesBox, 1, 1);
-            this.settingsTabTableLayoutPanel.Controls.Add(this.label29, 0, 2);
+            this.settingsTabTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.settingsTabTableLayoutPanel.Controls.Add(this.settingsDecayNever, 3, 7);
+            this.settingsTabTableLayoutPanel.Controls.Add(this.settingsDecayIntBox, 2, 3);
+            this.settingsTabTableLayoutPanel.Controls.Add(this.settingsDecayYearly, 3, 6);
+            this.settingsTabTableLayoutPanel.Controls.Add(this.label28, 0, 1);
+            this.settingsTabTableLayoutPanel.Controls.Add(this.settingsDecayMonthly, 3, 5);
+            this.settingsTabTableLayoutPanel.Controls.Add(this.label38, 1, 3);
+            this.settingsTabTableLayoutPanel.Controls.Add(this.settingsDecayWeekly, 3, 4);
+            this.settingsTabTableLayoutPanel.Controls.Add(this.settingsMultiplierBox, 1, 1);
+            this.settingsTabTableLayoutPanel.Controls.Add(this.settingsDecayDaily, 3, 3);
+            this.settingsTabTableLayoutPanel.Controls.Add(this.label37, 0, 2);
+            this.settingsTabTableLayoutPanel.Controls.Add(this.settingsMatchesBox, 1, 2);
+            this.settingsTabTableLayoutPanel.Controls.Add(this.label29, 0, 3);
+            this.settingsTabTableLayoutPanel.Controls.Add(this.label40, 0, 0);
+            this.settingsTabTableLayoutPanel.Controls.Add(this.settingsWorldName, 1, 0);
             this.settingsTabTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.settingsTabTableLayoutPanel.Name = "settingsTabTableLayoutPanel";
-            this.settingsTabTableLayoutPanel.RowCount = 8;
+            this.settingsTabTableLayoutPanel.RowCount = 10;
+            this.settingsTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.settingsTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.settingsTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.settingsTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.settingsTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
@@ -1746,7 +1617,7 @@
             this.settingsDecayNever.AutoSize = true;
             this.settingsDecayNever.Checked = true;
             this.settingsDecayNever.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.settingsDecayNever.Location = new System.Drawing.Point(268, 177);
+            this.settingsDecayNever.Location = new System.Drawing.Point(268, 206);
             this.settingsDecayNever.Name = "settingsDecayNever";
             this.settingsDecayNever.Size = new System.Drawing.Size(194, 23);
             this.settingsDecayNever.TabIndex = 7;
@@ -1759,7 +1630,7 @@
             // 
             this.settingsDecayIntBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.settingsDecayIntBox.Enabled = false;
-            this.settingsDecayIntBox.Location = new System.Drawing.Point(223, 61);
+            this.settingsDecayIntBox.Location = new System.Drawing.Point(223, 90);
             this.settingsDecayIntBox.Name = "settingsDecayIntBox";
             this.settingsDecayIntBox.Size = new System.Drawing.Size(39, 20);
             this.settingsDecayIntBox.TabIndex = 10;
@@ -1770,7 +1641,7 @@
             // 
             this.settingsDecayYearly.AutoSize = true;
             this.settingsDecayYearly.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.settingsDecayYearly.Location = new System.Drawing.Point(268, 148);
+            this.settingsDecayYearly.Location = new System.Drawing.Point(268, 177);
             this.settingsDecayYearly.Name = "settingsDecayYearly";
             this.settingsDecayYearly.Size = new System.Drawing.Size(194, 23);
             this.settingsDecayYearly.TabIndex = 6;
@@ -1782,7 +1653,7 @@
             // 
             this.label28.AutoSize = true;
             this.label28.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label28.Location = new System.Drawing.Point(3, 0);
+            this.label28.Location = new System.Drawing.Point(3, 29);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(174, 29);
             this.label28.TabIndex = 0;
@@ -1793,7 +1664,7 @@
             // 
             this.settingsDecayMonthly.AutoSize = true;
             this.settingsDecayMonthly.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.settingsDecayMonthly.Location = new System.Drawing.Point(268, 119);
+            this.settingsDecayMonthly.Location = new System.Drawing.Point(268, 148);
             this.settingsDecayMonthly.Name = "settingsDecayMonthly";
             this.settingsDecayMonthly.Size = new System.Drawing.Size(194, 23);
             this.settingsDecayMonthly.TabIndex = 5;
@@ -1805,7 +1676,7 @@
             // 
             this.label38.AutoSize = true;
             this.label38.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label38.Location = new System.Drawing.Point(183, 58);
+            this.label38.Location = new System.Drawing.Point(183, 87);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(34, 29);
             this.label38.TabIndex = 9;
@@ -1816,7 +1687,7 @@
             // 
             this.settingsDecayWeekly.AutoSize = true;
             this.settingsDecayWeekly.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.settingsDecayWeekly.Location = new System.Drawing.Point(268, 90);
+            this.settingsDecayWeekly.Location = new System.Drawing.Point(268, 119);
             this.settingsDecayWeekly.Name = "settingsDecayWeekly";
             this.settingsDecayWeekly.Size = new System.Drawing.Size(194, 23);
             this.settingsDecayWeekly.TabIndex = 4;
@@ -1828,7 +1699,7 @@
             // 
             this.settingsTabTableLayoutPanel.SetColumnSpan(this.settingsMultiplierBox, 3);
             this.settingsMultiplierBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.settingsMultiplierBox.Location = new System.Drawing.Point(183, 3);
+            this.settingsMultiplierBox.Location = new System.Drawing.Point(183, 32);
             this.settingsMultiplierBox.Name = "settingsMultiplierBox";
             this.settingsMultiplierBox.Size = new System.Drawing.Size(279, 20);
             this.settingsMultiplierBox.TabIndex = 1;
@@ -1839,7 +1710,7 @@
             // 
             this.settingsDecayDaily.AutoSize = true;
             this.settingsDecayDaily.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.settingsDecayDaily.Location = new System.Drawing.Point(268, 61);
+            this.settingsDecayDaily.Location = new System.Drawing.Point(268, 90);
             this.settingsDecayDaily.Name = "settingsDecayDaily";
             this.settingsDecayDaily.Size = new System.Drawing.Size(194, 23);
             this.settingsDecayDaily.TabIndex = 3;
@@ -1851,7 +1722,7 @@
             // 
             this.label37.AutoSize = true;
             this.label37.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label37.Location = new System.Drawing.Point(3, 29);
+            this.label37.Location = new System.Drawing.Point(3, 58);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(174, 29);
             this.label37.TabIndex = 8;
@@ -1862,7 +1733,7 @@
             // 
             this.settingsTabTableLayoutPanel.SetColumnSpan(this.settingsMatchesBox, 3);
             this.settingsMatchesBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.settingsMatchesBox.Location = new System.Drawing.Point(183, 32);
+            this.settingsMatchesBox.Location = new System.Drawing.Point(183, 61);
             this.settingsMatchesBox.Name = "settingsMatchesBox";
             this.settingsMatchesBox.Size = new System.Drawing.Size(279, 20);
             this.settingsMatchesBox.TabIndex = 2;
@@ -1873,12 +1744,33 @@
             // 
             this.label29.AutoSize = true;
             this.label29.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label29.Location = new System.Drawing.Point(3, 58);
+            this.label29.Location = new System.Drawing.Point(3, 87);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(174, 29);
             this.label29.TabIndex = 2;
             this.label29.Text = "Decay Interval";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label40.Location = new System.Drawing.Point(3, 0);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(174, 29);
+            this.label40.TabIndex = 11;
+            this.label40.Text = "World Name";
+            this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // settingsWorldName
+            // 
+            this.settingsTabTableLayoutPanel.SetColumnSpan(this.settingsWorldName, 3);
+            this.settingsWorldName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.settingsWorldName.Location = new System.Drawing.Point(183, 3);
+            this.settingsWorldName.Name = "settingsWorldName";
+            this.settingsWorldName.Size = new System.Drawing.Size(279, 20);
+            this.settingsWorldName.TabIndex = 12;
+            this.settingsWorldName.TextChanged += new System.EventHandler(this.settingsWorldName_TextChanged);
             // 
             // aboutTab
             // 
@@ -2016,6 +1908,143 @@
             this.label39.TabIndex = 9;
             this.label39.Text = "Smash.GG C# API Wrapper by Nicholas \"_ThreeFold\" McNew";
             // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "Player1";
+            this.dataGridViewTextBoxColumn11.HeaderText = "Player1";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.Width = 67;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "Player2";
+            this.dataGridViewTextBoxColumn12.HeaderText = "Player2";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.Width = 67;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "Description";
+            this.dataGridViewTextBoxColumn10.HeaderText = "Description";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.Width = 85;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "Winner";
+            this.dataGridViewTextBoxColumn13.HeaderText = "Winner";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.Width = 66;
+            // 
+            // timestampDataGridViewTextBoxColumn
+            // 
+            this.timestampDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.timestampDataGridViewTextBoxColumn.DataPropertyName = "Timestamp";
+            this.timestampDataGridViewTextBoxColumn.HeaderText = "Timestamp";
+            this.timestampDataGridViewTextBoxColumn.Name = "timestampDataGridViewTextBoxColumn";
+            this.timestampDataGridViewTextBoxColumn.Width = 83;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "Order";
+            this.dataGridViewTextBoxColumn14.HeaderText = "Order";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.Width = 58;
+            // 
+            // matchBindingSource
+            // 
+            this.matchBindingSource.DataSource = typeof(SkillKeeper.Match);
+            // 
+            // teamDataGridViewTextBoxColumn
+            // 
+            this.teamDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.teamDataGridViewTextBoxColumn.DataPropertyName = "Team";
+            this.teamDataGridViewTextBoxColumn.HeaderText = "Team";
+            this.teamDataGridViewTextBoxColumn.Name = "teamDataGridViewTextBoxColumn";
+            this.teamDataGridViewTextBoxColumn.ReadOnly = true;
+            this.teamDataGridViewTextBoxColumn.Width = 59;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nameDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // charactersDataGridViewTextBoxColumn
+            // 
+            this.charactersDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.charactersDataGridViewTextBoxColumn.DataPropertyName = "Characters";
+            this.charactersDataGridViewTextBoxColumn.HeaderText = "Characters";
+            this.charactersDataGridViewTextBoxColumn.Name = "charactersDataGridViewTextBoxColumn";
+            this.charactersDataGridViewTextBoxColumn.ReadOnly = true;
+            this.charactersDataGridViewTextBoxColumn.Width = 5;
+            // 
+            // winsDataGridViewTextBoxColumn
+            // 
+            this.winsDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.winsDataGridViewTextBoxColumn.DataPropertyName = "Wins";
+            this.winsDataGridViewTextBoxColumn.HeaderText = "Wins";
+            this.winsDataGridViewTextBoxColumn.Name = "winsDataGridViewTextBoxColumn";
+            this.winsDataGridViewTextBoxColumn.ReadOnly = true;
+            this.winsDataGridViewTextBoxColumn.Width = 56;
+            // 
+            // lossesDataGridViewTextBoxColumn
+            // 
+            this.lossesDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.lossesDataGridViewTextBoxColumn.DataPropertyName = "Losses";
+            this.lossesDataGridViewTextBoxColumn.HeaderText = "Losses";
+            this.lossesDataGridViewTextBoxColumn.Name = "lossesDataGridViewTextBoxColumn";
+            this.lossesDataGridViewTextBoxColumn.ReadOnly = true;
+            this.lossesDataGridViewTextBoxColumn.Width = 65;
+            // 
+            // drawsDataGridViewTextBoxColumn
+            // 
+            this.drawsDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.drawsDataGridViewTextBoxColumn.DataPropertyName = "Draws";
+            this.drawsDataGridViewTextBoxColumn.HeaderText = "Draws";
+            this.drawsDataGridViewTextBoxColumn.Name = "drawsDataGridViewTextBoxColumn";
+            this.drawsDataGridViewTextBoxColumn.ReadOnly = true;
+            this.drawsDataGridViewTextBoxColumn.Width = 62;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "TotalGames";
+            this.dataGridViewTextBoxColumn9.HeaderText = "TotalGames";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.dataGridViewTextBoxColumn9.Width = 89;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "WinPercent";
+            this.dataGridViewTextBoxColumn8.HeaderText = "WinPercent";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Width = 88;
+            // 
+            // scoreDataGridViewTextBoxColumn
+            // 
+            this.scoreDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.scoreDataGridViewTextBoxColumn.DataPropertyName = "Score";
+            this.scoreDataGridViewTextBoxColumn.HeaderText = "Score";
+            this.scoreDataGridViewTextBoxColumn.Name = "scoreDataGridViewTextBoxColumn";
+            this.scoreDataGridViewTextBoxColumn.ReadOnly = true;
+            this.scoreDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // personBindingSource
+            // 
+            this.personBindingSource.DataSource = typeof(SkillKeeper.Person);
+            // 
             // MainWindow
             // 
             this.AllowDrop = true;
@@ -2047,12 +2076,10 @@
             this.historyTableLayoutPanel2.ResumeLayout(false);
             this.historyTableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.historyGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.matchBindingSource)).EndInit();
             this.leaderboardTab.ResumeLayout(false);
             this.leaderboardTabTableLayoutPanel.ResumeLayout(false);
             this.leaderboardTabTableLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.leaderBoardGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).EndInit();
             this.settingsTab.ResumeLayout(false);
             this.settingsTabTableLayoutPanel.ResumeLayout(false);
             this.settingsTabTableLayoutPanel.PerformLayout();
@@ -2060,6 +2087,8 @@
             this.aboutTabTableLayoutPanel.ResumeLayout(false);
             this.aboutTabTableLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2198,7 +2227,6 @@
         private System.Windows.Forms.TextBox settingsDecayIntBox;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.TableLayoutPanel fileTabTableLayoutPanel;
-        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.TableLayoutPanel manualResultsTableLayoutPanel;
         private System.Windows.Forms.ComboBox player2Selector;
         private System.Windows.Forms.TextBox p2MuDisplay;
@@ -2236,6 +2264,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private System.Windows.Forms.Button historyMoveMatchButton;
         private System.Windows.Forms.Button btnSaveToDb;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.TextBox settingsWorldName;
     }
 }
         

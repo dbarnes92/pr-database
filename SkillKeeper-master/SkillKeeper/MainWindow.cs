@@ -32,11 +32,13 @@ namespace SkillKeeper
         private List<Person> playerList;
         private List<Person> leaderBoardList = new List<Person>();
         private List<Match> matchList;
+        private World currentWorld;
 
         private String openedWorld = "";
 
         public MainWindow()
         {
+            currentWorld = new World();
             matchList = new List<Match>();
             playerList = new List<Person>();
 
@@ -342,12 +344,15 @@ namespace SkillKeeper
             p2WinButton.Enabled = false;
             drawButton.Enabled = false;
             settingsDecayNever.Checked = true;
+            settingsWorldName.Text = "";
 
             multiplier = 200;
             decay = 0;
             settingsMultiplierBox.Text = "200";
 
-            openedWorld = "";
+            currentWorld.Name = "";
+            currentWorld.Filename = "";
+            //openedWorld = "";
             requireSave = false;
 
             rebuildPlayerSelection();
@@ -375,7 +380,8 @@ namespace SkillKeeper
 
             if (openWorldDialog.ShowDialog() == DialogResult.OK)
             {
-                openedWorld = openWorldDialog.FileName;
+                //openedWorld = openWorldDialog.FileName;
+                currentWorld.Filename = openWorldDialog.FileName;
                 requireSave = false;
                 progressBar1.Visible = true;
                 progressBar1.Value = 0;
@@ -388,6 +394,8 @@ namespace SkillKeeper
                 if (xEle.Element("Settings") != null)
                 {
                     multiplier = Int32.Parse(xEle.Element("Settings").Attribute("Multiplier").Value);
+                    currentWorld.Name = xEle.Element("Settings").Attribute("WorldName").Value;
+                    settingsWorldName.Text = currentWorld.Name;
                     if(xEle.Element("Settings").Attribute("MinMatches") != null)
                         minMatches = UInt32.Parse(xEle.Element("Settings").Attribute("MinMatches").Value);
                     decay = UInt16.Parse(xEle.Element("Settings").Attribute("Decay").Value);
@@ -485,47 +493,65 @@ namespace SkillKeeper
 
         private void fileSaveButton_Click(object sender, EventArgs e)
         {
-            if (scoresChanged)
-                TabControl1_SelectedIndexChanged(sender, e);
-
-            saveWorldDialog.Reset();
-            if (openedWorld.Length > 0)
-                saveWorldDialog.FileName = openedWorld;
-
-            saveWorldDialog.Filter = "Bacon files (*.bcn)|*.bcn|SkillKeeper92 files (*.sk92)|*.sk92|All files (*.*)|*.*";
-
-            if (saveWorldDialog.ShowDialog() == DialogResult.OK)
+            if (worldIsNamed())
             {
-                var xEle = new XElement(
-                    new XElement("SK92",
-                        new XElement("Settings",
-                            new XAttribute("Multiplier", multiplier),
-                            new XAttribute("MinMatches", minMatches),
-                            new XAttribute("Decay", decay),
-                            new XAttribute("DecayValue", decayValue)
-                        ),
-                        new XElement("Players", from player in playerList select new XElement("Player", 
-                            new XAttribute("Name", player.Name), 
-                            new XAttribute("Team", player.Team), 
-                            new XAttribute("Invisible", player.Invisible),
-                            new XAttribute("Characters", player.Characters),
-                            new XAttribute("Alts", player.AltsString)
-                        )),
-                        new XElement("Matches", from match in matchList select new XElement("Match",
-                            new XAttribute("ID", match.ID),
-                            new XAttribute("Timestamp", match.Timestamp.ToString()),
-                            new XAttribute("Order", match.Order),
-                            new XAttribute("Tournament", match.TourneyName),
-                            new XAttribute("Description", match.Description),
-                            new XAttribute("Player1", match.Player1),
-                            new XAttribute("Player2", match.Player2),
-                            new XAttribute("Winner", match.Winner)
-                        ))
-                ));
-                xEle.Save(saveWorldDialog.FileName);
-                openedWorld = saveWorldDialog.FileName;
-                requireSave = false;
+                if (scoresChanged)
+                    TabControl1_SelectedIndexChanged(sender, e);
+
+                saveWorldDialog.Reset();
+                if (currentWorld.Filename.Length > 0)
+                {
+                    //saveWorldDialog.FileName = openedWorld;
+                    saveWorldDialog.FileName = currentWorld.Filename;
+                }
+
+
+
+                saveWorldDialog.Filter = "Bacon files (*.bcn)|*.bcn|SkillKeeper92 files (*.sk92)|*.sk92|All files (*.*)|*.*";
+
+                if (saveWorldDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var xEle = new XElement(
+                        new XElement("SK92",
+                            new XElement("Settings",
+                                new XAttribute("WorldName", currentWorld.Name),
+                                new XAttribute("Multiplier", multiplier),
+                                new XAttribute("MinMatches", minMatches),
+                                new XAttribute("Decay", decay),
+                                new XAttribute("DecayValue", decayValue)
+                            ),
+                            new XElement("Players", from player in playerList
+                                                    select new XElement("Player",
+                                                        new XAttribute("Name", player.Name),
+                                                        new XAttribute("Team", player.Team),
+                                                        new XAttribute("Invisible", player.Invisible),
+                                                        new XAttribute("Characters", player.Characters),
+                                                        new XAttribute("Alts", player.AltsString)
+                                                        )),
+                            new XElement("Matches", from match in matchList
+                                                    select new XElement("Match",
+                                                        new XAttribute("ID", match.ID),
+                                                        new XAttribute("Timestamp", match.Timestamp.ToString()),
+                                                        new XAttribute("Order", match.Order),
+                                                        new XAttribute("Tournament", match.TourneyName),
+                                                        new XAttribute("Description", match.Description),
+                                                        new XAttribute("Player1", match.Player1),
+                                                        new XAttribute("Player2", match.Player2),
+                                                        new XAttribute("Winner", match.Winner)
+                                                        ))
+                    ));
+                    xEle.Save(saveWorldDialog.FileName);
+                    //openedWorld = saveWorldDialog.FileName;
+                    currentWorld.Filename = saveWorldDialog.FileName;
+                    requireSave = false;
+                }
             }
+            else
+            {
+                tabControl1.SelectedTab = settingsTab;
+                settingsWorldName.BackColor = Color.LightSalmon;
+            }
+            
         }
 
         private void fileUpdateButton_Click(object sender, EventArgs e)
@@ -533,11 +559,12 @@ namespace SkillKeeper
             if (scoresChanged)
                 TabControl1_SelectedIndexChanged(sender, e);
 
-            if (openedWorld != "")
+            if (currentWorld.Filename != "")
             {
                 var xEle = new XElement(
                         new XElement("SK92",
                             new XElement("Settings",
+                                new XAttribute("WorldName", currentWorld.Name),
                                 new XAttribute("Multiplier", multiplier),
                                 new XAttribute("MinMatches", minMatches),
                                 new XAttribute("Decay", decay),
@@ -563,7 +590,8 @@ namespace SkillKeeper
                                                         new XAttribute("Winner", match.Winner)
                                                         ))
                     ));
-                xEle.Save(openedWorld);
+                //xEle.Save(openedWorld);
+                xEle.Save(currentWorld.Filename);
                 requireSave = false;
             }
             else
@@ -1531,6 +1559,18 @@ namespace SkillKeeper
         private void btnSaveToDb_Click(object sender, EventArgs e)
         {
             SyncPlayers();
+        }
+
+        private void settingsWorldName_TextChanged(object sender, EventArgs e)
+        {
+            currentWorld.Name = settingsWorldName.Text;
+            settingsWorldName.BackColor = SystemColors.Window;
+            Console.WriteLine("World Name: " + currentWorld.Name);
+        }
+
+        private bool worldIsNamed()
+        {
+            return currentWorld.Name.Length > 0 ? true : false;
         }
     }
 }
