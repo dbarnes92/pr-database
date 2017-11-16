@@ -1556,8 +1556,66 @@ namespace SkillKeeper
             }
         }
 
+        private void SyncWorld()
+        {
+            String connectionString = "datasource=localhost;database=playground;port=3306;username=root;password=root";
+            List<String> worldNamesList = new List<String>();
+            List<int> worldIdsList = new List<int>();
+
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand insertCommand = connection.CreateCommand();
+                MySqlCommand selectCommand = connection.CreateCommand();
+                MySqlCommand updateCommand = connection.CreateCommand();
+
+                selectCommand.CommandText = "SELECT id, nm FROM region";
+
+                connection.Open();
+                using (var reader = selectCommand.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        //worldIdsList.Add(Convert.ToInt32(reader.GetString(0)));
+                        worldIdsList.Add(reader.GetInt16(0));
+                        worldNamesList.Add(reader.GetString(1));
+                    }
+                }
+
+                if (worldNamesList.Any(currentWorld.Name.Contains))
+                {
+                    Console.WriteLine("World " + currentWorld.Name + " found in DB - UPDATE");
+                    currentWorld.Id = worldIdsList.ElementAt(worldNamesList.IndexOf(currentWorld.Name, 0));
+
+                    updateCommand.CommandText = "UPDATE region SET nm = @nm, multiplier = @multiplier, min_matches = @min_matches, decay = @decay, decay_val = @decay_val";
+                    updateCommand.Parameters.AddWithValue("@nm", currentWorld.Name);
+                    updateCommand.Parameters.AddWithValue("@multiplier", multiplier);
+                    updateCommand.Parameters.AddWithValue("@min_matches", minMatches);
+                    updateCommand.Parameters.AddWithValue("@decay", decay);
+                    updateCommand.Parameters.AddWithValue("@decay_val", decayValue);
+
+                    updateCommand.ExecuteNonQuery();
+                    updateCommand.Parameters.Clear();
+                }
+                else
+                {
+                    Console.WriteLine("World " + currentWorld.Name + " NOT found in DB - INSERT");
+
+                    insertCommand.CommandText = "INSERT INTO region (nm, multiplier, min_matches, decay, decay_val) VALUES (@nm, @multiplier, @min_matches, @decay, @decay_val)";
+                    insertCommand.Parameters.AddWithValue("@nm", currentWorld.Name);
+                    insertCommand.Parameters.AddWithValue("@multiplier", multiplier);
+                    insertCommand.Parameters.AddWithValue("@min_matches", minMatches);
+                    insertCommand.Parameters.AddWithValue("@decay", decay);
+                    insertCommand.Parameters.AddWithValue("@decay_val", decayValue);
+
+                    insertCommand.ExecuteNonQuery();
+                    insertCommand.Parameters.Clear();
+                }
+            }
+        }
+
         private void btnSaveToDb_Click(object sender, EventArgs e)
         {
+            SyncWorld();
             SyncPlayers();
         }
 
