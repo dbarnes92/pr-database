@@ -15,6 +15,7 @@ namespace SkillKeeper
         private DateTime lastMatch = DateTime.FromBinary(0);
         private Double multiplier = 200;
         private Boolean invisible = false;
+        private Boolean indatabase = false;
 
         public void decayScore(Double startSigma)
         {
@@ -23,6 +24,11 @@ namespace SkillKeeper
                 sigma = startSigma;
         }
 
+        public Boolean inDatabase
+        {
+            get { return indatabase; }
+            set { indatabase = value; }
+        }
         public String Name
         {
             get { return name; }

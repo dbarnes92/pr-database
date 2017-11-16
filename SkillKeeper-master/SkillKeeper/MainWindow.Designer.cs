@@ -44,6 +44,7 @@
             this.fileImportTioButton = new System.Windows.Forms.Button();
             this.fileImportChallongeButton = new System.Windows.Forms.Button();
             this.fileImportGlickoButton = new System.Windows.Forms.Button();
+            this.btnSaveToDb = new System.Windows.Forms.Button();
             this.resultsTab = new System.Windows.Forms.TabPage();
             this.manualResultsTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.matchQualBox = new System.Windows.Forms.TextBox();
@@ -177,7 +178,6 @@
             this.saveWorldDialog = new System.Windows.Forms.SaveFileDialog();
             this.importFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.exportCSVDialog = new System.Windows.Forms.SaveFileDialog();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.fileTab.SuspendLayout();
             this.fileTabTableLayoutPanel.SuspendLayout();
@@ -256,7 +256,7 @@
             this.fileTabTableLayoutPanel.Controls.Add(this.fileImportTioButton, 3, 3);
             this.fileTabTableLayoutPanel.Controls.Add(this.fileImportChallongeButton, 1, 2);
             this.fileTabTableLayoutPanel.Controls.Add(this.fileImportGlickoButton, 3, 2);
-            this.fileTabTableLayoutPanel.Controls.Add(this.button1, 1, 4);
+            this.fileTabTableLayoutPanel.Controls.Add(this.btnSaveToDb, 1, 4);
             this.fileTabTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileTabTableLayoutPanel.Location = new System.Drawing.Point(3, 3);
             this.fileTabTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
@@ -399,6 +399,16 @@
             this.fileImportGlickoButton.UseVisualStyleBackColor = true;
             this.fileImportGlickoButton.Click += new System.EventHandler(this.fileImportGlickoButton_Click);
             // 
+            // btnSaveToDb
+            // 
+            this.btnSaveToDb.Location = new System.Drawing.Point(178, 213);
+            this.btnSaveToDb.Name = "btnSaveToDb";
+            this.btnSaveToDb.Size = new System.Drawing.Size(89, 104);
+            this.btnSaveToDb.TabIndex = 11;
+            this.btnSaveToDb.Text = "Save World to Database";
+            this.btnSaveToDb.UseVisualStyleBackColor = true;
+            this.btnSaveToDb.Click += new System.EventHandler(this.btnSaveToDb_Click);
+            // 
             // resultsTab
             // 
             this.resultsTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -406,7 +416,7 @@
             this.resultsTab.Location = new System.Drawing.Point(4, 22);
             this.resultsTab.Name = "resultsTab";
             this.resultsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.resultsTab.Size = new System.Drawing.Size(736, 375);
+            this.resultsTab.Size = new System.Drawing.Size(736, 376);
             this.resultsTab.TabIndex = 1;
             this.resultsTab.Text = "Manual Results";
             this.resultsTab.UseVisualStyleBackColor = true;
@@ -421,7 +431,7 @@
             this.manualResultsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.36842F));
             this.manualResultsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.31579F));
             this.manualResultsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
-            this.manualResultsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 155F));
+            this.manualResultsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 156F));
             this.manualResultsTableLayoutPanel.Controls.Add(this.matchQualBox, 2, 1);
             this.manualResultsTableLayoutPanel.Controls.Add(this.label11, 0, 6);
             this.manualResultsTableLayoutPanel.Controls.Add(this.label7, 0, 5);
@@ -463,7 +473,7 @@
             this.manualResultsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.manualResultsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.manualResultsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.manualResultsTableLayoutPanel.Size = new System.Drawing.Size(730, 369);
+            this.manualResultsTableLayoutPanel.Size = new System.Drawing.Size(730, 370);
             this.manualResultsTableLayoutPanel.TabIndex = 29;
             // 
             // matchQualBox
@@ -473,7 +483,7 @@
             this.matchQualBox.Location = new System.Drawing.Point(193, 33);
             this.matchQualBox.Name = "matchQualBox";
             this.matchQualBox.ReadOnly = true;
-            this.matchQualBox.Size = new System.Drawing.Size(268, 20);
+            this.matchQualBox.Size = new System.Drawing.Size(267, 20);
             this.matchQualBox.TabIndex = 27;
             // 
             // label11
@@ -532,7 +542,7 @@
             this.manualDatePicker.Dock = System.Windows.Forms.DockStyle.Fill;
             this.manualDatePicker.Location = new System.Drawing.Point(193, 183);
             this.manualDatePicker.Name = "manualDatePicker";
-            this.manualDatePicker.Size = new System.Drawing.Size(268, 20);
+            this.manualDatePicker.Size = new System.Drawing.Size(267, 20);
             this.manualDatePicker.TabIndex = 6;
             // 
             // label5
@@ -557,7 +567,7 @@
             this.manualResultsTableLayoutPanel.SetColumnSpan(this.label25, 3);
             this.label25.Location = new System.Drawing.Point(193, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(268, 30);
+            this.label25.Size = new System.Drawing.Size(267, 30);
             this.label25.TabIndex = 28;
             this.label25.Text = "Match Quality";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -582,7 +592,7 @@
             this.manualResultsTableLayoutPanel.SetColumnSpan(this.label24, 3);
             this.label24.Location = new System.Drawing.Point(193, 150);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(268, 30);
+            this.label24.Size = new System.Drawing.Size(267, 30);
             this.label24.TabIndex = 25;
             this.label24.Text = "Match Date";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -627,7 +637,7 @@
             this.ManualDescBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ManualDescBox.Location = new System.Drawing.Point(193, 123);
             this.ManualDescBox.Name = "ManualDescBox";
-            this.ManualDescBox.Size = new System.Drawing.Size(268, 20);
+            this.ManualDescBox.Size = new System.Drawing.Size(267, 20);
             this.ManualDescBox.TabIndex = 5;
             // 
             // label23
@@ -639,7 +649,7 @@
             this.manualResultsTableLayoutPanel.SetColumnSpan(this.label23, 3);
             this.label23.Location = new System.Drawing.Point(193, 90);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(268, 30);
+            this.label23.Size = new System.Drawing.Size(267, 30);
             this.label23.TabIndex = 24;
             this.label23.Text = "Match Description";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -650,7 +660,7 @@
             this.drawButton.Enabled = false;
             this.drawButton.Location = new System.Drawing.Point(265, 63);
             this.drawButton.Name = "drawButton";
-            this.drawButton.Size = new System.Drawing.Size(124, 24);
+            this.drawButton.Size = new System.Drawing.Size(123, 24);
             this.drawButton.TabIndex = 3;
             this.drawButton.Text = "Draw";
             this.drawButton.UseVisualStyleBackColor = true;
@@ -660,7 +670,7 @@
             // 
             this.p2WinButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.p2WinButton.Enabled = false;
-            this.p2WinButton.Location = new System.Drawing.Point(395, 63);
+            this.p2WinButton.Location = new System.Drawing.Point(394, 63);
             this.p2WinButton.Name = "p2WinButton";
             this.p2WinButton.Size = new System.Drawing.Size(66, 24);
             this.p2WinButton.TabIndex = 4;
@@ -700,9 +710,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(577, 30);
+            this.label4.Location = new System.Drawing.Point(576, 30);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(150, 30);
+            this.label4.Size = new System.Drawing.Size(151, 30);
             this.label4.TabIndex = 3;
             this.label4.Text = "Player 2";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -713,9 +723,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(577, 180);
+            this.label12.Location = new System.Drawing.Point(576, 180);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(150, 30);
+            this.label12.Size = new System.Drawing.Size(151, 30);
             this.label12.TabIndex = 22;
             this.label12.Text = "W/L/D";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -726,9 +736,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(577, 150);
+            this.label8.Location = new System.Drawing.Point(576, 150);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(150, 30);
+            this.label8.Size = new System.Drawing.Size(151, 30);
             this.label8.TabIndex = 18;
             this.label8.Text = "Score";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -739,9 +749,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(577, 120);
+            this.label9.Location = new System.Drawing.Point(576, 120);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(150, 30);
+            this.label9.Size = new System.Drawing.Size(151, 30);
             this.label9.TabIndex = 14;
             this.label9.Text = "Sigma";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -752,9 +762,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(577, 90);
+            this.label10.Location = new System.Drawing.Point(576, 90);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(150, 30);
+            this.label10.Size = new System.Drawing.Size(151, 30);
             this.label10.TabIndex = 13;
             this.label10.Text = "Mu";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -766,9 +776,9 @@
             this.manualResultsTableLayoutPanel.SetColumnSpan(this.player2Selector, 2);
             this.player2Selector.Dock = System.Windows.Forms.DockStyle.Fill;
             this.player2Selector.FormattingEnabled = true;
-            this.player2Selector.Location = new System.Drawing.Point(467, 63);
+            this.player2Selector.Location = new System.Drawing.Point(466, 63);
             this.player2Selector.Name = "player2Selector";
-            this.player2Selector.Size = new System.Drawing.Size(260, 21);
+            this.player2Selector.Size = new System.Drawing.Size(261, 21);
             this.player2Selector.TabIndex = 1;
             this.player2Selector.SelectedIndexChanged += new System.EventHandler(this.player2Box_SelectedIndexChanged);
             // 
@@ -777,7 +787,7 @@
             this.p2MuDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.p2MuDisplay.Location = new System.Drawing.Point(467, 93);
+            this.p2MuDisplay.Location = new System.Drawing.Point(466, 93);
             this.p2MuDisplay.Name = "p2MuDisplay";
             this.p2MuDisplay.ReadOnly = true;
             this.p2MuDisplay.Size = new System.Drawing.Size(104, 20);
@@ -788,7 +798,7 @@
             this.p2SigmaDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.p2SigmaDisplay.Location = new System.Drawing.Point(467, 123);
+            this.p2SigmaDisplay.Location = new System.Drawing.Point(466, 123);
             this.p2SigmaDisplay.Name = "p2SigmaDisplay";
             this.p2SigmaDisplay.ReadOnly = true;
             this.p2SigmaDisplay.Size = new System.Drawing.Size(104, 20);
@@ -799,7 +809,7 @@
             this.p2ScoreDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.p2ScoreDisplay.Location = new System.Drawing.Point(467, 153);
+            this.p2ScoreDisplay.Location = new System.Drawing.Point(466, 153);
             this.p2ScoreDisplay.Name = "p2ScoreDisplay";
             this.p2ScoreDisplay.ReadOnly = true;
             this.p2ScoreDisplay.Size = new System.Drawing.Size(104, 20);
@@ -810,7 +820,7 @@
             this.p2WLDBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.p2WLDBox.Location = new System.Drawing.Point(467, 183);
+            this.p2WLDBox.Location = new System.Drawing.Point(466, 183);
             this.p2WLDBox.Name = "p2WLDBox";
             this.p2WLDBox.ReadOnly = true;
             this.p2WLDBox.Size = new System.Drawing.Size(104, 20);
@@ -822,7 +832,7 @@
             this.addTab.Controls.Add(this.addPlayerTabTableLayoutPanel);
             this.addTab.Location = new System.Drawing.Point(4, 22);
             this.addTab.Name = "addTab";
-            this.addTab.Size = new System.Drawing.Size(736, 375);
+            this.addTab.Size = new System.Drawing.Size(736, 376);
             this.addTab.TabIndex = 2;
             this.addTab.Text = "Add Player";
             this.addTab.UseVisualStyleBackColor = true;
@@ -848,7 +858,7 @@
             this.addPlayerTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.addPlayerTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.addPlayerTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.addPlayerTabTableLayoutPanel.Size = new System.Drawing.Size(736, 375);
+            this.addPlayerTabTableLayoutPanel.Size = new System.Drawing.Size(736, 376);
             this.addPlayerTabTableLayoutPanel.TabIndex = 7;
             // 
             // label1
@@ -927,7 +937,7 @@
             this.modifyTab.Controls.Add(this.viewModifyPlayerTableLayoutPanel);
             this.modifyTab.Location = new System.Drawing.Point(4, 22);
             this.modifyTab.Name = "modifyTab";
-            this.modifyTab.Size = new System.Drawing.Size(736, 375);
+            this.modifyTab.Size = new System.Drawing.Size(736, 376);
             this.modifyTab.TabIndex = 3;
             this.modifyTab.Text = "View/Modify Player";
             this.modifyTab.UseVisualStyleBackColor = true;
@@ -983,7 +993,7 @@
             this.viewModifyPlayerTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.viewModifyPlayerTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.viewModifyPlayerTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.viewModifyPlayerTableLayoutPanel.Size = new System.Drawing.Size(736, 375);
+            this.viewModifyPlayerTableLayoutPanel.Size = new System.Drawing.Size(736, 376);
             this.viewModifyPlayerTableLayoutPanel.TabIndex = 36;
             // 
             // modifyCombineButton
@@ -1021,7 +1031,7 @@
             this.modifyDetailBox.ReadOnly = true;
             this.viewModifyPlayerTableLayoutPanel.SetRowSpan(this.modifyDetailBox, 13);
             this.modifyDetailBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.modifyDetailBox.Size = new System.Drawing.Size(330, 340);
+            this.modifyDetailBox.Size = new System.Drawing.Size(330, 341);
             this.modifyDetailBox.TabIndex = 29;
             this.modifyDetailBox.WordWrap = false;
             // 
@@ -1264,7 +1274,7 @@
             this.historyTab.Controls.Add(this.historyTableLayoutPanel2);
             this.historyTab.Location = new System.Drawing.Point(4, 22);
             this.historyTab.Name = "historyTab";
-            this.historyTab.Size = new System.Drawing.Size(736, 375);
+            this.historyTab.Size = new System.Drawing.Size(736, 376);
             this.historyTab.TabIndex = 6;
             this.historyTab.Text = "History";
             this.historyTab.UseVisualStyleBackColor = true;
@@ -1297,14 +1307,14 @@
             this.historyTableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.historyTableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.historyTableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.historyTableLayoutPanel2.Size = new System.Drawing.Size(736, 375);
+            this.historyTableLayoutPanel2.Size = new System.Drawing.Size(736, 376);
             this.historyTableLayoutPanel2.TabIndex = 9;
             // 
             // historyMoveMatchButton
             // 
             this.historyMoveMatchButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.historyMoveMatchButton.Enabled = false;
-            this.historyMoveMatchButton.Location = new System.Drawing.Point(606, 349);
+            this.historyMoveMatchButton.Location = new System.Drawing.Point(606, 350);
             this.historyMoveMatchButton.Name = "historyMoveMatchButton";
             this.historyMoveMatchButton.Size = new System.Drawing.Size(127, 23);
             this.historyMoveMatchButton.TabIndex = 9;
@@ -1345,7 +1355,7 @@
             this.historyGridView.MultiSelect = false;
             this.historyGridView.Name = "historyGridView";
             this.historyGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.historyGridView.Size = new System.Drawing.Size(730, 311);
+            this.historyGridView.Size = new System.Drawing.Size(730, 312);
             this.historyGridView.TabIndex = 0;
             this.historyGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.historyGridView_CellContentClick);
             this.historyGridView.CurrentCellDirtyStateChanged += new System.EventHandler(this.historyGridView_CurrentCellDirtyStateChanged);
@@ -1414,7 +1424,7 @@
             // 
             this.historyMoveTourneyButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.historyMoveTourneyButton.Enabled = false;
-            this.historyMoveTourneyButton.Location = new System.Drawing.Point(463, 349);
+            this.historyMoveTourneyButton.Location = new System.Drawing.Point(463, 350);
             this.historyMoveTourneyButton.Name = "historyMoveTourneyButton";
             this.historyMoveTourneyButton.Size = new System.Drawing.Size(137, 23);
             this.historyMoveTourneyButton.TabIndex = 6;
@@ -1425,7 +1435,7 @@
             // historyMoveDatePicker
             // 
             this.historyMoveDatePicker.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.historyMoveDatePicker.Location = new System.Drawing.Point(278, 349);
+            this.historyMoveDatePicker.Location = new System.Drawing.Point(278, 350);
             this.historyMoveDatePicker.Name = "historyMoveDatePicker";
             this.historyMoveDatePicker.Size = new System.Drawing.Size(179, 20);
             this.historyMoveDatePicker.TabIndex = 5;
@@ -1447,7 +1457,7 @@
             // 
             this.historyApplyButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.historyApplyButton.Enabled = false;
-            this.historyApplyButton.Location = new System.Drawing.Point(3, 349);
+            this.historyApplyButton.Location = new System.Drawing.Point(3, 350);
             this.historyApplyButton.Name = "historyApplyButton";
             this.historyApplyButton.Size = new System.Drawing.Size(63, 23);
             this.historyApplyButton.TabIndex = 4;
@@ -1469,7 +1479,7 @@
             // 
             this.historyDeleteMatchButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.historyDeleteMatchButton.Enabled = false;
-            this.historyDeleteMatchButton.Location = new System.Drawing.Point(72, 349);
+            this.historyDeleteMatchButton.Location = new System.Drawing.Point(72, 350);
             this.historyDeleteMatchButton.Name = "historyDeleteMatchButton";
             this.historyDeleteMatchButton.Size = new System.Drawing.Size(100, 23);
             this.historyDeleteMatchButton.TabIndex = 7;
@@ -1481,7 +1491,7 @@
             // 
             this.historyDeleteTournamentButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.historyDeleteTournamentButton.Enabled = false;
-            this.historyDeleteTournamentButton.Location = new System.Drawing.Point(178, 349);
+            this.historyDeleteTournamentButton.Location = new System.Drawing.Point(178, 350);
             this.historyDeleteTournamentButton.Name = "historyDeleteTournamentButton";
             this.historyDeleteTournamentButton.Size = new System.Drawing.Size(94, 23);
             this.historyDeleteTournamentButton.TabIndex = 8;
@@ -1495,7 +1505,7 @@
             this.leaderboardTab.Controls.Add(this.leaderboardTabTableLayoutPanel);
             this.leaderboardTab.Location = new System.Drawing.Point(4, 22);
             this.leaderboardTab.Name = "leaderboardTab";
-            this.leaderboardTab.Size = new System.Drawing.Size(736, 375);
+            this.leaderboardTab.Size = new System.Drawing.Size(736, 376);
             this.leaderboardTab.TabIndex = 4;
             this.leaderboardTab.Text = "Leaderboard";
             this.leaderboardTab.UseVisualStyleBackColor = true;
@@ -1518,7 +1528,7 @@
             this.leaderboardTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.leaderboardTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.leaderboardTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.leaderboardTabTableLayoutPanel.Size = new System.Drawing.Size(736, 375);
+            this.leaderboardTabTableLayoutPanel.Size = new System.Drawing.Size(736, 376);
             this.leaderboardTabTableLayoutPanel.TabIndex = 4;
             // 
             // label30
@@ -1560,7 +1570,7 @@
             this.leaderBoardGrid.Name = "leaderBoardGrid";
             this.leaderBoardGrid.ReadOnly = true;
             this.leaderBoardGrid.ShowEditingIcon = false;
-            this.leaderBoardGrid.Size = new System.Drawing.Size(730, 311);
+            this.leaderBoardGrid.Size = new System.Drawing.Size(730, 312);
             this.leaderBoardGrid.TabIndex = 0;
             this.leaderBoardGrid.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.leaderBoardGrid_CellContentDoubleClick);
             this.leaderBoardGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.leaderBoardGrid_CellDoubleClick);
@@ -1663,7 +1673,7 @@
             // 
             this.leaderboardTabTableLayoutPanel.SetColumnSpan(this.exportButton, 2);
             this.exportButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.exportButton.Location = new System.Drawing.Point(3, 349);
+            this.exportButton.Location = new System.Drawing.Point(3, 350);
             this.exportButton.Name = "exportButton";
             this.exportButton.Size = new System.Drawing.Size(182, 23);
             this.exportButton.TabIndex = 1;
@@ -1689,7 +1699,7 @@
             this.settingsTab.Controls.Add(this.settingsTabTableLayoutPanel);
             this.settingsTab.Location = new System.Drawing.Point(4, 22);
             this.settingsTab.Name = "settingsTab";
-            this.settingsTab.Size = new System.Drawing.Size(736, 375);
+            this.settingsTab.Size = new System.Drawing.Size(736, 376);
             this.settingsTab.TabIndex = 7;
             this.settingsTab.Text = "Settings";
             this.settingsTab.UseVisualStyleBackColor = true;
@@ -1876,7 +1886,7 @@
             this.aboutTab.Controls.Add(this.aboutTabTableLayoutPanel);
             this.aboutTab.Location = new System.Drawing.Point(4, 22);
             this.aboutTab.Name = "aboutTab";
-            this.aboutTab.Size = new System.Drawing.Size(736, 375);
+            this.aboutTab.Size = new System.Drawing.Size(736, 376);
             this.aboutTab.TabIndex = 5;
             this.aboutTab.Text = "About";
             this.aboutTab.UseVisualStyleBackColor = true;
@@ -1911,7 +1921,7 @@
             this.aboutTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.aboutTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.aboutTabTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.aboutTabTableLayoutPanel.Size = new System.Drawing.Size(736, 375);
+            this.aboutTabTableLayoutPanel.Size = new System.Drawing.Size(736, 376);
             this.aboutTabTableLayoutPanel.TabIndex = 9;
             // 
             // label36
@@ -1984,7 +1994,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(730, 164);
+            this.textBox1.Size = new System.Drawing.Size(730, 165);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
@@ -2005,16 +2015,6 @@
             this.label39.Size = new System.Drawing.Size(304, 13);
             this.label39.TabIndex = 9;
             this.label39.Text = "Smash.GG C# API Wrapper by Nicholas \"_ThreeFold\" McNew";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(178, 213);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(89, 104);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Save World to Database";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // MainWindow
             // 
@@ -2235,7 +2235,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn timestampDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private System.Windows.Forms.Button historyMoveMatchButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSaveToDb;
     }
 }
         

@@ -1430,89 +1430,107 @@ namespace SkillKeeper
             buildHistory();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void SyncPlayers()
         {
             String connectionString = "datasource=localhost;database=playground;port=3306;username=root;password=root";
 
-            /*
-            if (saveWorldDialog.ShowDialog() == DialogResult.OK)
+            using (var connection = new MySqlConnection(connectionString))
             {
-                var xEle = new XElement(
-                    new XElement("SK92",
-                        new XElement("Settings",
-                            new XAttribute("Multiplier", multiplier),
-                            new XAttribute("MinMatches", minMatches),
-                            new XAttribute("Decay", decay),
-                            new XAttribute("DecayValue", decayValue)
-                        ),
-                        new XElement("Players", from player in playerList
-                                                select new XElement("Player",
-                                                    new XAttribute("Name", player.Name),
-                                                    new XAttribute("Team", player.Team),
-                                                    new XAttribute("Invisible", player.Invisible),
-                                                    new XAttribute("Characters", player.Characters),
-                                                    new XAttribute("Alts", player.AltsString)
-                                                    )),
-                        new XElement("Matches", from match in matchList
-                                                select new XElement("Match",
-                                                    new XAttribute("ID", match.ID),
-                                                    new XAttribute("Timestamp", match.Timestamp.ToString()),
-                                                    new XAttribute("Order", match.Order),
-                                                    new XAttribute("Tournament", match.TourneyName),
-                                                    new XAttribute("Description", match.Description),
-                                                    new XAttribute("Player1", match.Player1),
-                                                    new XAttribute("Player2", match.Player2),
-                                                    new XAttribute("Winner", match.Winner)
-                                                    ))
-                ));
-                //xEle.Save(saveWorldDialog.FileName);
-                //openedWorld = saveWorldDialog.FileName;
-                //requireSave = false;
+                MySqlCommand insertCommand = connection.CreateCommand();
+                MySqlCommand selectCommand = connection.CreateCommand();
+                MySqlCommand updateCommand = connection.CreateCommand();
+                List<String> names = new List<String>();
 
-                */             
-                using (var connection = new MySqlConnection(connectionString))
+                /*
+                command.CommandText = "INSERT INTO region (nm, multiplier, min_matches, decay, decay_val) VALUES (@name, @multiplier, @minmatches, @decay, @decayval)";
+                command.Parameters.AddWithValue("@name", "TestWorld");
+                command.Parameters.AddWithValue("@multiplier", multiplier);
+                command.Parameters.AddWithValue("@minmatches", minMatches);
+                command.Parameters.AddWithValue("@decay", decay);
+                command.Parameters.AddWithValue("@decayval", decayValue);
+
+                */
+                selectCommand.CommandText = "SELECT primary_nm FROM player";
+                connection.Open();
+                using (var reader = selectCommand.ExecuteReader())
                 {
-                    MySqlCommand command = connection.CreateCommand();
-                    //command.CommandText = "INSERT INTO player (primary_nm, attended_num, elo) VALUES (@name, 1, 1500)";
-                    //command.Parameters.AddWithValue("@name", "GwJ");
-                    command.CommandText = "INSERT INTO region (nm, multiplier, min_matches, decay, decay_val) VALUES (@name, @multiplier, @minmatches, @decay, @decayval)";
-                    command.Parameters.AddWithValue("@name", "TestWorld");
-                    command.Parameters.AddWithValue("@multiplier", multiplier);
-                    command.Parameters.AddWithValue("@minmatches", minMatches);
-                    command.Parameters.AddWithValue("@decay", decay);
-                    command.Parameters.AddWithValue("@decayval", decayValue);
-
-                    connection.Open();
-                    command.ExecuteNonQuery();
-
-                    command.CommandText = "INSERT INTO player (primary_nm, wins, losses, elo, team, invisible, characters, has_alt, mu, sigma, last_match, decay_months) VALUES (@primaryname, @wins, @losses, @elo, @team, @invisible, @characters, @has_alt, @mu, @sigma, @lastmatch, @decaymonths)";
-
-                    foreach (Person player in playerList)
+                    while (reader.Read())
                     {
-                        int hasalt = 0;
-                        if (player.Alts.Count > 0)
-                        {
-                            hasalt = 1;
-                        }
-
-                        command.Parameters.AddWithValue("@primaryname", player.Name);
-                        command.Parameters.AddWithValue("@wins", player.Wins);
-                        command.Parameters.AddWithValue("@losses", player.Losses);
-                        command.Parameters.AddWithValue("@elo", player.Score);
-                        command.Parameters.AddWithValue("@team", player.Team);
-                        command.Parameters.AddWithValue("@invisible", player.Invisible);
-                        command.Parameters.AddWithValue("@characters", player.Characters);                  
-                        command.Parameters.AddWithValue("@hasalt", hasalt);
-                        command.Parameters.AddWithValue("@mu", player.Mu);
-                        command.Parameters.AddWithValue("@sigma", player.Sigma);
-                        command.Parameters.AddWithValue("@lastmatch", player.LastMatch);
-                        command.Parameters.AddWithValue("@decaymonths", player.DecayMonths);
-
-                        command.ExecuteNonQuery();
-                        command.Parameters.Clear();
+                        names.Add(reader.GetString(0));
                     }
-                    connection.Close();
+                }
+
+                foreach (Person player in playerList)
+                {
+                    player.inDatabase = false;
+                    player.inDatabase = names.Any(player.Name.Contains);
+                    if (player.inDatabase)
+                    {
+                        Console.WriteLine("Player " + player.Name + " found in DB");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Player " + player.Name + " NOT found in DB");
+                    }
+                }
+                /*
+                foreach (String name in names)
+                {
+                    Console.WriteLine(name);
+                }
+                */
+
+                insertCommand.CommandText = "INSERT INTO player (primary_nm, wins, losses, elo, team, invisible, characters, has_alt) VALUES (@primaryname, @wins, @losses, @elo, @team, @invisible, @characters, @hasalt)";
+                updateCommand.CommandText = "UPDATE player SET wins = @wins, losses = @losses, elo = @elo, team = @team, invisible = @invisible, characters = @characters, has_alt = @hasalt";
+
+                foreach (Person player in playerList)
+                {
+                    if (player.inDatabase)
+                    {
+                        Console.WriteLine("Player " + player.Name + " UPDATED");
+                        updateCommand.Parameters.AddWithValue("@wins", player.Wins);
+                        updateCommand.Parameters.AddWithValue("@losses", player.Losses);
+                        updateCommand.Parameters.AddWithValue("@elo", player.Score);
+                        updateCommand.Parameters.AddWithValue("@team", player.Team);
+                        updateCommand.Parameters.AddWithValue("@invisible", player.Invisible ? 1 : 0);
+                        updateCommand.Parameters.AddWithValue("@characters", player.Characters);
+                        updateCommand.Parameters.AddWithValue("@hasalt", player.Alts.Count > 0 ? 1 : 0);
+                        updateCommand.Parameters.AddWithValue("@mu", player.Mu);
+                        updateCommand.Parameters.AddWithValue("@sigma", player.Sigma);
+                        updateCommand.Parameters.AddWithValue("@lastmatch", player.LastMatch);
+                        updateCommand.Parameters.AddWithValue("@decaymonths", player.DecayMonths);
+
+                        updateCommand.ExecuteNonQuery();
+                        updateCommand.Parameters.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Player " + player.Name + " INSERTED");
+                        insertCommand.Parameters.AddWithValue("@primaryname", player.Name);
+                        insertCommand.Parameters.AddWithValue("@wins", player.Wins);
+                        insertCommand.Parameters.AddWithValue("@losses", player.Losses);
+                        insertCommand.Parameters.AddWithValue("@elo", player.Score);
+                        insertCommand.Parameters.AddWithValue("@team", player.Team);
+                        insertCommand.Parameters.AddWithValue("@invisible", player.Invisible ? 1 : 0);
+                        insertCommand.Parameters.AddWithValue("@characters", player.Characters);
+                        insertCommand.Parameters.AddWithValue("@hasalt", player.Alts.Count > 0 ? 1 : 0);
+                        insertCommand.Parameters.AddWithValue("@mu", player.Mu);
+                        insertCommand.Parameters.AddWithValue("@sigma", player.Sigma);
+                        insertCommand.Parameters.AddWithValue("@lastmatch", player.LastMatch);
+                        insertCommand.Parameters.AddWithValue("@decaymonths", player.DecayMonths);
+
+                        insertCommand.ExecuteNonQuery();
+                        insertCommand.Parameters.Clear();
+                    }
+
+                }
+                connection.Close();
             }
+        }
+
+        private void btnSaveToDb_Click(object sender, EventArgs e)
+        {
+            SyncPlayers();
         }
     }
 }
