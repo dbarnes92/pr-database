@@ -38,7 +38,7 @@ CREATE TABLE `player` (
   `last_match` datetime DEFAULT NULL,
   `decay_months` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=317 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=937 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,7 +100,6 @@ CREATE TABLE `region` (
 
 LOCK TABLES `region` WRITE;
 /*!40000 ALTER TABLE `region` DISABLE KEYS */;
-INSERT INTO `region` VALUES (8,'TestWorld',200,1,3,3),(9,'TestWorld',200,1,3,3),(10,'TestWorld',200,1,3,3),(11,'TestWorld',200,1,3,3),(12,'TestWorld',200,1,3,3),(13,'TestWorld',200,1,3,3),(14,'TestWorld',200,1,3,3);
 /*!40000 ALTER TABLE `region` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,4 +184,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-15 14:58:43
+-- Dump completed on 2017-11-16 11:44:37
