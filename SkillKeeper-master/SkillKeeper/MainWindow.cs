@@ -24,6 +24,8 @@ namespace SkillKeeper
         private List<Match> matchList;
         private World currentWorld;
 
+        private String connectionString = "datasource=localhost;database=playground;port=3306;username=root;password=root";
+
         private Boolean scoresChanged = false;
 
         private Boolean requireSave = false;
@@ -385,8 +387,14 @@ namespace SkillKeeper
 
                 if (xEle.Element("Settings") != null)
                 {
-                    currentWorld.Multiplier = Int32.Parse(xEle.Element("Settings").Attribute("Multiplier").Value);
-                    currentWorld.Name = xEle.Element("Settings").Attribute("WorldName").Value;
+                    if (xEle.Element("Settings").Attribute("Multiplier") != null)
+                        currentWorld.Multiplier = Int32.Parse(xEle.Element("Settings").Attribute("Multiplier").Value);
+                    else
+                        currentWorld.Multiplier = 200;
+                    if (xEle.Element("Settings").Attribute("WorldName") != null)
+                        currentWorld.Name = xEle.Element("Settings").Attribute("WorldName").Value;
+                    else
+                        currentWorld.Name = "";
                     settingsWorldName.Text = currentWorld.Name;
                     if(xEle.Element("Settings").Attribute("MinMatches") != null)
                         currentWorld.MinMatches = UInt32.Parse(xEle.Element("Settings").Attribute("MinMatches").Value);
@@ -395,6 +403,14 @@ namespace SkillKeeper
                         currentWorld.DecayValue = UInt32.Parse(xEle.Element("Settings").Attribute("DecayValue").Value);
                     else
                         currentWorld.DecayValue = 1;
+                    if (xEle.Element("Settings").Attribute("StartMu") != null)
+                        currentWorld.StartMu = Double.Parse(xEle.Element("Settings").Attribute("StartMu").Value);
+                    else
+                        currentWorld.StartMu = 25.0;
+                    if (xEle.Element("Settings").Attribute("StartSigma") != null)
+                        currentWorld.StartSigma = Double.Parse(xEle.Element("Settings").Attribute("StartSigma").Value);
+                    else
+                        currentWorld.StartSigma = currentWorld.StartMu / 3.0;
                     settingsMultiplierBox.Text = currentWorld.Multiplier.ToString();
                 }
 
@@ -510,7 +526,9 @@ namespace SkillKeeper
                                 new XAttribute("Multiplier", currentWorld.Multiplier),
                                 new XAttribute("MinMatches", currentWorld.MinMatches),
                                 new XAttribute("Decay", currentWorld.Decay),
-                                new XAttribute("DecayValue", currentWorld.DecayValue)
+                                new XAttribute("DecayValue", currentWorld.DecayValue),
+                                new XAttribute("StartMu", currentWorld.StartMu),
+                                new XAttribute("StartSigma", currentWorld.StartSigma)
                             ),
                             new XElement("Players", from player in playerList
                                                     select new XElement("Player",
@@ -560,7 +578,9 @@ namespace SkillKeeper
                                 new XAttribute("Multiplier", currentWorld.Multiplier),
                                 new XAttribute("MinMatches", currentWorld.MinMatches),
                                 new XAttribute("Decay", currentWorld.Decay),
-                                new XAttribute("DecayValue", currentWorld.DecayValue)
+                                new XAttribute("DecayValue", currentWorld.DecayValue),
+                                new XAttribute("StartMu", currentWorld.StartMu),
+                                new XAttribute("StartSigma", currentWorld.StartSigma)
                             ),
                             new XElement("Players", from player in playerList
                                                     select new XElement("Player",
@@ -1452,8 +1472,6 @@ namespace SkillKeeper
 
         private void SyncPlayers()
         {
-            String connectionString = "datasource=localhost;database=playground;port=3306;username=root;password=root";
-
             using (var connection = new MySqlConnection(connectionString))
             {
                 MySqlCommand insertCommand = connection.CreateCommand();
@@ -1461,16 +1479,10 @@ namespace SkillKeeper
                 MySqlCommand updateCommand = connection.CreateCommand();
                 List<String> names = new List<String>();
 
-                /*
-                command.CommandText = "INSERT INTO region (nm, multiplier, min_matches, decay, decay_val) VALUES (@name, @multiplier, @minmatches, @decay, @decayval)";
-                command.Parameters.AddWithValue("@name", "TestWorld");
-                command.Parameters.AddWithValue("@multiplier", multiplier);
-                command.Parameters.AddWithValue("@minmatches", minMatches);
-                command.Parameters.AddWithValue("@decay", decay);
-                command.Parameters.AddWithValue("@decayval", decayValue);
-
-                */
                 selectCommand.CommandText = "SELECT primary_nm FROM player";
+                insertCommand.CommandText = "INSERT INTO player (primary_nm, wins, losses, elo, team, invisible, characters, has_alt) VALUES (@primaryname, @wins, @losses, @elo, @team, @invisible, @characters, @hasalt)";
+                updateCommand.CommandText = "UPDATE player SET wins = @wins, losses = @losses, elo = @elo, team = @team, invisible = @invisible, characters = @characters, has_alt = @hasalt WHERE primary_nm = @primary_name";
+
                 connection.Open();
                 using (var reader = selectCommand.ExecuteReader())
                 {
@@ -1493,15 +1505,6 @@ namespace SkillKeeper
                         Console.WriteLine("Player " + player.Name + " NOT found in DB");
                     }
                 }
-                /*
-                foreach (String name in names)
-                {
-                    Console.WriteLine(name);
-                }
-                */
-
-                insertCommand.CommandText = "INSERT INTO player (primary_nm, wins, losses, elo, team, invisible, characters, has_alt) VALUES (@primaryname, @wins, @losses, @elo, @team, @invisible, @characters, @hasalt)";
-                updateCommand.CommandText = "UPDATE player SET wins = @wins, losses = @losses, elo = @elo, team = @team, invisible = @invisible, characters = @characters, has_alt = @hasalt";
 
                 foreach (Person player in playerList)
                 {
@@ -1519,6 +1522,8 @@ namespace SkillKeeper
                         updateCommand.Parameters.AddWithValue("@sigma", player.Sigma);
                         updateCommand.Parameters.AddWithValue("@lastmatch", player.LastMatch);
                         updateCommand.Parameters.AddWithValue("@decaymonths", player.DecayMonths);
+
+                        updateCommand.Parameters.AddWithValue("@primary_name", player.Name);
 
                         updateCommand.ExecuteNonQuery();
                         updateCommand.Parameters.Clear();
@@ -1542,7 +1547,6 @@ namespace SkillKeeper
                         insertCommand.ExecuteNonQuery();
                         insertCommand.Parameters.Clear();
                     }
-
                 }
                 connection.Close();
             }
@@ -1550,7 +1554,6 @@ namespace SkillKeeper
 
         private void SyncWorld()
         {
-            String connectionString = "datasource=localhost;database=playground;port=3306;username=root;password=root";
             List<String> worldNamesList = new List<String>();
             List<int> worldIdsList = new List<int>();
 
@@ -1561,13 +1564,15 @@ namespace SkillKeeper
                 MySqlCommand updateCommand = connection.CreateCommand();
 
                 selectCommand.CommandText = "SELECT id, nm FROM region";
+                updateCommand.CommandText = "UPDATE region SET nm = @nm, multiplier = @multiplier, min_matches = @min_matches, decay = @decay, decay_val = @decay_val, start_mu = @start_mu, start_sigma = @start_sigma WHERE nm = @world_name";
+                insertCommand.CommandText = "INSERT INTO region (nm, multiplier, min_matches, decay, decay_val, start_mu, start_sigma) VALUES (@nm, @multiplier, @min_matches, @decay, @decay_val, @start_mu, @start_sigma)";
+
 
                 connection.Open();
                 using (var reader = selectCommand.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        //worldIdsList.Add(Convert.ToInt32(reader.GetString(0)));
                         worldIdsList.Add(reader.GetInt16(0));
                         worldNamesList.Add(reader.GetString(1));
                     }
@@ -1578,12 +1583,15 @@ namespace SkillKeeper
                     Console.WriteLine("World " + currentWorld.Name + " found in DB - UPDATE");
                     currentWorld.Id = worldIdsList.ElementAt(worldNamesList.IndexOf(currentWorld.Name, 0));
 
-                    updateCommand.CommandText = "UPDATE region SET nm = @nm, multiplier = @multiplier, min_matches = @min_matches, decay = @decay, decay_val = @decay_val";
                     updateCommand.Parameters.AddWithValue("@nm", currentWorld.Name);
                     updateCommand.Parameters.AddWithValue("@multiplier", currentWorld.Multiplier);
                     updateCommand.Parameters.AddWithValue("@min_matches", currentWorld.MinMatches);
                     updateCommand.Parameters.AddWithValue("@decay", currentWorld.Decay);
                     updateCommand.Parameters.AddWithValue("@decay_val", currentWorld.DecayValue);
+                    updateCommand.Parameters.AddWithValue("@start_mu", currentWorld.StartMu);
+                    updateCommand.Parameters.AddWithValue("@start_sigma", currentWorld.StartSigma);
+
+                    updateCommand.Parameters.AddWithValue("@world_name", currentWorld.Name);
 
                     updateCommand.ExecuteNonQuery();
                     updateCommand.Parameters.Clear();
@@ -1592,12 +1600,13 @@ namespace SkillKeeper
                 {
                     Console.WriteLine("World " + currentWorld.Name + " NOT found in DB - INSERT");
 
-                    insertCommand.CommandText = "INSERT INTO region (nm, multiplier, min_matches, decay, decay_val) VALUES (@nm, @multiplier, @min_matches, @decay, @decay_val)";
                     insertCommand.Parameters.AddWithValue("@nm", currentWorld.Name);
                     insertCommand.Parameters.AddWithValue("@multiplier", currentWorld.Multiplier);
                     insertCommand.Parameters.AddWithValue("@min_matches", currentWorld.MinMatches);
                     insertCommand.Parameters.AddWithValue("@decay", currentWorld.Decay);
                     insertCommand.Parameters.AddWithValue("@decay_val", currentWorld.DecayValue);
+                    insertCommand.Parameters.AddWithValue("@start_mu", currentWorld.StartMu);
+                    insertCommand.Parameters.AddWithValue("@start_sigma", currentWorld.StartSigma);
 
                     insertCommand.ExecuteNonQuery();
                     insertCommand.Parameters.Clear();
@@ -1605,10 +1614,68 @@ namespace SkillKeeper
             }
         }
 
+        private void SyncMatches()
+        {
+
+            List<String> matchIdList = new List<String>();
+
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand insertCommand = connection.CreateCommand();
+                MySqlCommand selectCommand = connection.CreateCommand();
+                MySqlCommand updateCommand = connection.CreateCommand();
+
+                selectCommand.CommandText = "SELECT sk_id FROM set_data";
+
+                connection.Open();
+
+                using (var reader = selectCommand.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        matchIdList.Add(reader.GetString(0));
+                    }
+                }
+
+                foreach (Match match in matchList) {
+                    if (matchIdList.Any(match.ID.Contains))
+                    {
+                        Console.WriteLine("Match ID " + match.ID + " found. UPDATE");
+
+                        //currentWorld.Id = worldIdsList.ElementAt(worldNamesList.IndexOf(currentWorld.Name, 0));
+
+                        updateCommand.Parameters.AddWithValue("@nm", currentWorld.Name);
+                        updateCommand.Parameters.AddWithValue("@multiplier", currentWorld.Multiplier);
+                        updateCommand.Parameters.AddWithValue("@min_matches", currentWorld.MinMatches);
+                        updateCommand.Parameters.AddWithValue("@decay", currentWorld.Decay);
+                        updateCommand.Parameters.AddWithValue("@decay_val", currentWorld.DecayValue);
+                        updateCommand.Parameters.AddWithValue("@start_mu", currentWorld.StartMu);
+                        updateCommand.Parameters.AddWithValue("@start_sigma", currentWorld.StartSigma);
+
+                        updateCommand.ExecuteNonQuery();
+                        updateCommand.Parameters.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Match ID " + match.ID + " NOT found. INSERT");
+                    }
+                }
+            }
+        }
+
         private void btnSaveToDb_Click(object sender, EventArgs e)
         {
-            SyncWorld();
-            SyncPlayers();
+            if (currentWorld.Filename != "" && currentWorld.Name != "")
+            {
+                SyncWorld();
+                SyncPlayers();
+                //SyncMatches();
+            }
+            else
+            {
+                Console.WriteLine("Save and name a World first");
+            }
+
         }
 
         private void settingsWorldName_TextChanged(object sender, EventArgs e)
