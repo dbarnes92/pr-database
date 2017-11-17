@@ -19,22 +19,14 @@ namespace SkillKeeper
 {
     public partial class MainWindow : Form
     {
-        private Double startMu = 0;
-        private Double startSigma = 0;
-        private Double multiplier = 200;
-        private UInt16 decay = 0;
-        private UInt32 decayValue = 1;
-        private UInt32 minMatches = 1;
-        private Boolean scoresChanged = false;
-
-        private Boolean requireSave = false;
-
         private List<Person> playerList;
         private List<Person> leaderBoardList = new List<Person>();
         private List<Match> matchList;
         private World currentWorld;
 
-        private String openedWorld = "";
+        private Boolean scoresChanged = false;
+
+        private Boolean requireSave = false;
 
         public MainWindow()
         {
@@ -42,8 +34,8 @@ namespace SkillKeeper
             matchList = new List<Match>();
             playerList = new List<Person>();
 
-            startMu = 25;
-            startSigma = startMu / 3;
+            currentWorld.StartMu = 25;
+            currentWorld.StartSigma = currentWorld.StartMu / 3;
 
             InitializeComponent();
             manualDatePicker.Value = DateTime.Today;
@@ -76,11 +68,11 @@ namespace SkillKeeper
         {
             if (scoresChanged)
             {
-                multiplier = 200;
-                minMatches = 1;
+                currentWorld.Multiplier = 200;
+                currentWorld.MinMatches = 1;
                 try
                 {
-                    multiplier = Double.Parse(settingsMultiplierBox.Text);
+                    currentWorld.Multiplier = Double.Parse(settingsMultiplierBox.Text);
                 }
                 catch (Exception e2)
                 {
@@ -89,7 +81,7 @@ namespace SkillKeeper
                 }
                 try
                 {
-                    minMatches = UInt32.Parse(settingsMatchesBox.Text);
+                    currentWorld.MinMatches = UInt32.Parse(settingsMatchesBox.Text);
                 }
                 catch (Exception e2)
                 {
@@ -98,9 +90,9 @@ namespace SkillKeeper
                 }
                 try
                 {
-                    decayValue = UInt32.Parse(settingsDecayIntBox.Text);
-                    if (decayValue < 1)
-                        decayValue = 1;
+                    currentWorld.DecayValue = UInt32.Parse(settingsDecayIntBox.Text);
+                    if (currentWorld.DecayValue < 1)
+                        currentWorld.DecayValue = 1;
                 }
                 catch (Exception e2)
                 {
@@ -108,7 +100,7 @@ namespace SkillKeeper
                     Console.WriteLine(e2.StackTrace);
                 }
                 matchList = matchList.OrderBy(s => s.Timestamp).ThenBy(s => s.Order).ToList();
-                Toolbox.recalcMatches(playerList, matchList, startMu, startSigma, multiplier, decay, decayValue);
+                Toolbox.recalcMatches(playerList, matchList, currentWorld.StartMu, currentWorld.StartSigma, currentWorld.Multiplier, currentWorld.Decay, currentWorld.DecayValue);
                 buildHistory();
 
                 requireSave = true;
@@ -247,7 +239,7 @@ namespace SkillKeeper
             rebuildPlayerSelection();
 
             matchList = matchList.OrderBy(s => s.Timestamp).ThenBy(s => s.Order).ToList();
-            Toolbox.recalcMatches(playerList, matchList, startMu, startSigma, multiplier, decay, decayValue);
+            Toolbox.recalcMatches(playerList, matchList, currentWorld.StartMu, currentWorld.StartSigma, currentWorld.Multiplier, currentWorld.Decay, currentWorld.DecayValue);
             buildHistory();
 
             requireSave = true;
@@ -306,7 +298,7 @@ namespace SkillKeeper
             leaderBoardList.Clear();
             foreach (Person p in playerList)
             {
-                if (!p.Invisible && p.TotalGames >= minMatches)
+                if (!p.Invisible && p.TotalGames >= currentWorld.MinMatches)
                     leaderBoardList.Add(p);
             }
             personBindingSource.DataSource = new BindingList<Person>(leaderBoardList);
@@ -346,8 +338,8 @@ namespace SkillKeeper
             settingsDecayNever.Checked = true;
             settingsWorldName.Text = "";
 
-            multiplier = 200;
-            decay = 0;
+            currentWorld.Multiplier = 200;
+            currentWorld.Decay = 0;
             settingsMultiplierBox.Text = "200";
 
             currentWorld.Name = "";
@@ -356,7 +348,7 @@ namespace SkillKeeper
             requireSave = false;
 
             rebuildPlayerSelection();
-            Toolbox.recalcMatches(playerList, matchList, startMu, startSigma, multiplier, decay, decayValue);
+            Toolbox.recalcMatches(playerList, matchList, currentWorld.StartMu, currentWorld.StartSigma, currentWorld.Multiplier, currentWorld.Decay, currentWorld.DecayValue);
             buildHistory();
         }
 
@@ -393,17 +385,17 @@ namespace SkillKeeper
 
                 if (xEle.Element("Settings") != null)
                 {
-                    multiplier = Int32.Parse(xEle.Element("Settings").Attribute("Multiplier").Value);
+                    currentWorld.Multiplier = Int32.Parse(xEle.Element("Settings").Attribute("Multiplier").Value);
                     currentWorld.Name = xEle.Element("Settings").Attribute("WorldName").Value;
                     settingsWorldName.Text = currentWorld.Name;
                     if(xEle.Element("Settings").Attribute("MinMatches") != null)
-                        minMatches = UInt32.Parse(xEle.Element("Settings").Attribute("MinMatches").Value);
-                    decay = UInt16.Parse(xEle.Element("Settings").Attribute("Decay").Value);
+                        currentWorld.MinMatches = UInt32.Parse(xEle.Element("Settings").Attribute("MinMatches").Value);
+                    currentWorld.Decay = UInt16.Parse(xEle.Element("Settings").Attribute("Decay").Value);
                     if (xEle.Element("Settings").Attribute("DecayValue") != null)
-                        decayValue = UInt32.Parse(xEle.Element("Settings").Attribute("DecayValue").Value);
+                        currentWorld.DecayValue = UInt32.Parse(xEle.Element("Settings").Attribute("DecayValue").Value);
                     else
-                        decayValue = 1;
-                    settingsMultiplierBox.Text = multiplier.ToString();
+                        currentWorld.DecayValue = 1;
+                    settingsMultiplierBox.Text = currentWorld.Multiplier.ToString();
                 }
 
                 progressLabel.Text = "Loading players...";
@@ -451,8 +443,8 @@ namespace SkillKeeper
                     progressBar1.PerformStep();
                 }
 
-                settingsDecayIntBox.Text = decayValue + "";
-                switch (decay)
+                settingsDecayIntBox.Text = currentWorld.DecayValue + "";
+                switch (currentWorld.Decay)
                 {
                     case 1:
                         settingsDecayDaily.Checked = true;
@@ -477,7 +469,7 @@ namespace SkillKeeper
 
                 progressLabel.Text = "Calculating scores...";
                 progressLabel.Refresh();
-                Toolbox.recalcMatches(playerList, matchList, startMu, startSigma, multiplier, decay, decayValue, progressBar1);
+                Toolbox.recalcMatches(playerList, matchList, currentWorld.StartMu, currentWorld.StartSigma, currentWorld.Multiplier, currentWorld.Decay, currentWorld.DecayValue, progressBar1);
 
                 progressLabel.Text = "Verifying match history...";
                 progressLabel.Refresh();
@@ -515,10 +507,10 @@ namespace SkillKeeper
                         new XElement("SK92",
                             new XElement("Settings",
                                 new XAttribute("WorldName", currentWorld.Name),
-                                new XAttribute("Multiplier", multiplier),
-                                new XAttribute("MinMatches", minMatches),
-                                new XAttribute("Decay", decay),
-                                new XAttribute("DecayValue", decayValue)
+                                new XAttribute("Multiplier", currentWorld.Multiplier),
+                                new XAttribute("MinMatches", currentWorld.MinMatches),
+                                new XAttribute("Decay", currentWorld.Decay),
+                                new XAttribute("DecayValue", currentWorld.DecayValue)
                             ),
                             new XElement("Players", from player in playerList
                                                     select new XElement("Player",
@@ -565,10 +557,10 @@ namespace SkillKeeper
                         new XElement("SK92",
                             new XElement("Settings",
                                 new XAttribute("WorldName", currentWorld.Name),
-                                new XAttribute("Multiplier", multiplier),
-                                new XAttribute("MinMatches", minMatches),
-                                new XAttribute("Decay", decay),
-                                new XAttribute("DecayValue", decayValue)
+                                new XAttribute("Multiplier", currentWorld.Multiplier),
+                                new XAttribute("MinMatches", currentWorld.MinMatches),
+                                new XAttribute("Decay", currentWorld.Decay),
+                                new XAttribute("DecayValue", currentWorld.DecayValue)
                             ),
                             new XElement("Players", from player in playerList
                                                     select new XElement("Player",
@@ -638,7 +630,7 @@ namespace SkillKeeper
                     rebuildPlayerSelection();
 
                     matchList = matchList.OrderBy(s => s.Timestamp).ThenBy(s => s.Order).ToList();
-                    Toolbox.recalcMatches(playerList, matchList, startMu, startSigma, multiplier, decay, decayValue);
+                    Toolbox.recalcMatches(playerList, matchList, currentWorld.StartMu, currentWorld.StartSigma, currentWorld.Multiplier, currentWorld.Decay, currentWorld.DecayValue);
                     buildHistory();
                 }
             }
@@ -692,7 +684,7 @@ namespace SkillKeeper
                     rebuildPlayerSelection();
 
                     matchList = matchList.OrderBy(s => s.Timestamp).ThenBy(s => s.Order).ToList();
-                    Toolbox.recalcMatches(playerList, matchList, startMu, startSigma, multiplier, decay, decayValue);
+                    Toolbox.recalcMatches(playerList, matchList, currentWorld.StartMu, currentWorld.StartSigma, currentWorld.Multiplier, currentWorld.Decay, currentWorld.DecayValue);
                     buildHistory();
                 }
             }
@@ -751,7 +743,7 @@ namespace SkillKeeper
                         rebuildPlayerSelection();
 
                         matchList = matchList.OrderBy(s => s.Timestamp).ThenBy(s => s.Order).ToList();
-                        Toolbox.recalcMatches(playerList, matchList, startMu, startSigma, multiplier, decay, decayValue);
+                        Toolbox.recalcMatches(playerList, matchList, currentWorld.StartMu, currentWorld.StartSigma, currentWorld.Multiplier, currentWorld.Decay, currentWorld.DecayValue);
                         buildHistory();
                     }
 
@@ -823,7 +815,7 @@ namespace SkillKeeper
                 rebuildPlayerSelection();
 
                 matchList = matchList.OrderBy(s => s.Timestamp).ThenBy(s => s.Order).ToList();
-                Toolbox.recalcMatches(playerList, matchList, startMu, startSigma, multiplier, decay, decayValue);
+                Toolbox.recalcMatches(playerList, matchList, currentWorld.StartMu, currentWorld.StartSigma, currentWorld.Multiplier, currentWorld.Decay, currentWorld.DecayValue);
                 buildHistory();
             }
         }
@@ -837,8 +829,8 @@ namespace SkillKeeper
             person.Name = addPlayerBox.Text;
             person.Team = addTeamBox.Text;
             person.Characters = addCharacterBox.Text;
-            person.Mu = startMu;
-            person.Sigma = startSigma;
+            person.Mu = currentWorld.StartMu;
+            person.Sigma = currentWorld.StartSigma;
 
             addPlayerBox.Clear();
             addTeamBox.Clear();
@@ -1238,7 +1230,7 @@ namespace SkillKeeper
 
             historyDatePicker.Value = historyMoveDatePicker.Value;
             matchList = matchList.OrderBy(s => s.Timestamp).ThenBy(s => s.Order).ToList();
-            Toolbox.recalcMatches(playerList, matchList, startMu, startSigma, multiplier, decay, decayValue);
+            Toolbox.recalcMatches(playerList, matchList, currentWorld.StartMu, currentWorld.StartSigma, currentWorld.Multiplier, currentWorld.Decay, currentWorld.DecayValue);
             requireSave = true;
             scoresChanged = true;
             buildHistory();
@@ -1313,7 +1305,7 @@ namespace SkillKeeper
         // ------------------------------------
         private void leaderboardDatePicker_ValueChanged(object sender, EventArgs e)
         {
-            Toolbox.recalcMatches(playerList, matchList, startMu, startSigma, multiplier, decay, decayValue, leaderboardDatePicker.Value);
+            Toolbox.recalcMatches(playerList, matchList, currentWorld.StartMu, currentWorld.StartSigma, currentWorld.Multiplier, currentWorld.Decay, currentWorld.DecayValue, leaderboardDatePicker.Value);
             buildHistory();
         }
 
@@ -1367,27 +1359,27 @@ namespace SkillKeeper
             if (settingsDecayDaily.Checked)
             {
                 settingsDecayIntBox.Enabled = true;
-                decay = 1;
+                currentWorld.Decay = 1;
             }
             else if (settingsDecayWeekly.Checked)
             {
                 settingsDecayIntBox.Enabled = true;
-                decay = 2;
+                currentWorld.Decay = 2;
             }
             else if (settingsDecayMonthly.Checked)
             {
                 settingsDecayIntBox.Enabled = true;
-                decay = 3;
+                currentWorld.Decay = 3;
             }
             else if (settingsDecayYearly.Checked)
             {
                 settingsDecayIntBox.Enabled = true;
-                decay = 4;
+                currentWorld.Decay = 4;
             }
             else if (settingsDecayNever.Checked)
             {
                 settingsDecayIntBox.Enabled = false;
-                decay = 0;
+                currentWorld.Decay = 0;
             }
 
             scoresChanged = true;
@@ -1452,7 +1444,7 @@ namespace SkillKeeper
 
             historyDatePicker.Value = historyMoveDatePicker.Value;
             matchList = matchList.OrderBy(s => s.Timestamp).ThenBy(s => s.Order).ToList();
-            Toolbox.recalcMatches(playerList, matchList, startMu, startSigma, multiplier, decay, decayValue);
+            Toolbox.recalcMatches(playerList, matchList, currentWorld.StartMu, currentWorld.StartSigma, currentWorld.Multiplier, currentWorld.Decay, currentWorld.DecayValue);
             requireSave = true;
             scoresChanged = true;
             buildHistory();
@@ -1588,10 +1580,10 @@ namespace SkillKeeper
 
                     updateCommand.CommandText = "UPDATE region SET nm = @nm, multiplier = @multiplier, min_matches = @min_matches, decay = @decay, decay_val = @decay_val";
                     updateCommand.Parameters.AddWithValue("@nm", currentWorld.Name);
-                    updateCommand.Parameters.AddWithValue("@multiplier", multiplier);
-                    updateCommand.Parameters.AddWithValue("@min_matches", minMatches);
-                    updateCommand.Parameters.AddWithValue("@decay", decay);
-                    updateCommand.Parameters.AddWithValue("@decay_val", decayValue);
+                    updateCommand.Parameters.AddWithValue("@multiplier", currentWorld.Multiplier);
+                    updateCommand.Parameters.AddWithValue("@min_matches", currentWorld.MinMatches);
+                    updateCommand.Parameters.AddWithValue("@decay", currentWorld.Decay);
+                    updateCommand.Parameters.AddWithValue("@decay_val", currentWorld.DecayValue);
 
                     updateCommand.ExecuteNonQuery();
                     updateCommand.Parameters.Clear();
@@ -1602,10 +1594,10 @@ namespace SkillKeeper
 
                     insertCommand.CommandText = "INSERT INTO region (nm, multiplier, min_matches, decay, decay_val) VALUES (@nm, @multiplier, @min_matches, @decay, @decay_val)";
                     insertCommand.Parameters.AddWithValue("@nm", currentWorld.Name);
-                    insertCommand.Parameters.AddWithValue("@multiplier", multiplier);
-                    insertCommand.Parameters.AddWithValue("@min_matches", minMatches);
-                    insertCommand.Parameters.AddWithValue("@decay", decay);
-                    insertCommand.Parameters.AddWithValue("@decay_val", decayValue);
+                    insertCommand.Parameters.AddWithValue("@multiplier", currentWorld.Multiplier);
+                    insertCommand.Parameters.AddWithValue("@min_matches", currentWorld.MinMatches);
+                    insertCommand.Parameters.AddWithValue("@decay", currentWorld.Decay);
+                    insertCommand.Parameters.AddWithValue("@decay_val", currentWorld.DecayValue);
 
                     insertCommand.ExecuteNonQuery();
                     insertCommand.Parameters.Clear();
